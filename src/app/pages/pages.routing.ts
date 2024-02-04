@@ -29,7 +29,7 @@ export const routes: Routes = [
           
           {
           path: 'user',
-          component: PagesComponent,
+          component: UserComponent,
           children: [
     
           { path: '', 
