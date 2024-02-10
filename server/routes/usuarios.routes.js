@@ -33,4 +33,4 @@ router.put( '/:id',
         ], 
 updateUsuarios );
 
-module.exports =  router ;
+module.exports =  router;
