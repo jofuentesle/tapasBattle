@@ -8,7 +8,7 @@ const { check } = require('express-validator');
 const { validarCampos } = require('../middelware/validar-campos');
 const validarJWT = require('../middelware/validar-jwt');
 
-const { getRecipe, createRecipe, updateRecipe } = require('../controllers/recipe.controller')
+const { getRecipe, createRecipe, updateRecipe, deleteRecipe } = require('../controllers/recipe.controller')
 
 const router = Router();
 
@@ -26,5 +26,8 @@ router.put( '/:id',
         ],
         updateRecipe
 );    
+
+//actualizar receta
+router.delete( '/:id', deleteRecipe);    
 
 module.exports =  router;

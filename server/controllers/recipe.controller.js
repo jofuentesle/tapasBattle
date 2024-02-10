@@ -42,10 +42,9 @@ const createRecipe = async (req, res, next) => {
 const updateRecipe = async (req, res,rext) => {
 
     const uid = req.params.id
-    
 
     try {
-          
+
         const recipeDB = await Recipe.findById( uid );
 
         //verificamos receta
@@ -87,7 +86,39 @@ const updateRecipe = async (req, res,rext) => {
     }
 }
 
-const deleteRecipe = () => {
+const deleteRecipe = async (req, res, next ) => {
+
+    const uid = req.params.id
+
+    try {
+        const recipe = await Recipe.findById(uid);
+        console.log(recipe);
+        
+        if( !recipe ) {
+            return res.status(401).json({
+                ok: false,
+                msg:"Error, la receta no existe"
+            });
+        }
+
+        await recipe.deleteOne({uid});
+
+        res.status(200).json({
+            ok: true,
+            msg:"Receta borrada"
+        })
+
+        
+    } catch (error) {
+
+        console.log(error);
+        return res.status(404).json({
+            ok: false,
+            msg:"Error al borrar la receta"
+        })
+        
+    }
+
 
 }
 
