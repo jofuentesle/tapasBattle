@@ -20,6 +20,7 @@ dbConnection();
 app.use('/api/usuarios', require('./routes/usuarios.routes'));
 app.use('/api/login', require('./routes/auth.routes'));
 app.use('/api/recipe', require('./routes/recipe.routes'));
+app.use('/api/events', require('./routes/events.routes'))
 
 
 app.listen( process.env.PORT, ()=> {

@@ -5,6 +5,7 @@ const bcryptjs = require('bcryptjs')
 
 const Usuario = require('../models/usuario.model');
 
+//obtener usuarios
 const getUsuarios = async (req, res) => {
 
     const usuarios = await Usuario.find();
