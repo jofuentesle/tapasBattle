@@ -1,21 +1,48 @@
-
-<form>
-    <div class="row g-3">
-        <div class="col-md-6">
-            <div class="form-floating">
-                <input type="text" class="form-control" id="name" placeholder="Your Name">
-                <label for="name">Nombre</label>
+<div class="page-wrapper">
+    <div class="container mainContainer">
+    <div class="col-lg-7 text-center">
+    <h1 class="d-block p-2 bg-dark text-white">Bienvenido a tapasBattle</h1>
+    <div class="wow fadeIn" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeIn;">
+        <form
+            autocomplete="off"
+            formGroup = "loginForm"
+            (ngSubmit)="onLogin()">
+            <div class="row g-3">
+                <div class="col-12">
+                    <div class="form-floating">
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            id="user" 
+                            placeholder="Usuario"
+                            
+                            >
+                        <label for="name"><span class="m-3 iconBootsrap"><i class="bi bi-person"></i></span>Usuario</label>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-floating">
+                        <input 
+                            type="password" 
+                            class="form-control" 
+                            id="subject" 
+                            placeholder="contraseña"
+                            formControlName="password"
+                            >
+                        <label for="subject"><span class="m-3 iconBootsrap"><i class="bi bi-key-fill mr-3"></i></span>Contraseña</label>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <button 
+                        class="btn btn-primary w-100 py-3" 
+                        type="submit"
+                        >
+                        Entrar
+                    </button>
+                </div>
             </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-floating">
-                <input type="email" class="form-control" id="email" placeholder="Your Email">
-                <label for="email">Contraseña</label>
-            </div>
-        </div>
-        <div class="col-12">
-            <button class="btn btn-primary w-100 py-3" type="submit">Bienvenido..</button>
-        </div>
+        </form>
     </div>
-</form>
+    </div>
+</div>    
 
