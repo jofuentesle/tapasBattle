@@ -17,7 +17,6 @@ const getEvents = async (req, res=response ) => {
 const createEvents = async ( req, res=response ) => {
     
     const { 
-
         nombre,
         eventPlanerId,
         fecha,
@@ -30,7 +29,7 @@ const createEvents = async ( req, res=response ) => {
     try {
 
         //Creamos evento
-        const evento = new Events( req.body );
+        const evento = new Events( req.body, req.uid );
         evento.eventPlanerId = req.uid;
 
         //verificamos al generar events
@@ -70,14 +69,22 @@ const updateEvent = async (req, res, next) => {
             });   
         };
 
-        //Actualizamos usuario
+        if(eventoBD.eventPlanerId!==req.uid) {
+            return res.status(401).json({
+                ok: false,
+                msg:"No tienes privilegios para modificar este evento"
+            });
+        }
+
+        //Actualizamos evento
         const campos = req.body;
 
         const eventsUpdate = await Events.findByIdAndUpdate( uid, campos, { new: true});
         
+        console.log("eventes" );
         res.status(200).json({
             ok: true,
-            eventoBD
+            eventsUpdate
         });
 
     } catch (error) {
@@ -88,12 +95,53 @@ const updateEvent = async (req, res, next) => {
         })
         
     }
-
 }
+
+const deleteEvent = async (req, res, next) => {
+
+    const uid = req.params.id
+
+    try {
+
+        //buscamos evento en BBDD
+        const eventoBD = await Events.findById(uid);
+
+        if (!eventoBD) {
+            return req.status( 404 ).json({
+                ok:false,
+                msg: "Evento no encontrado"
+            });   
+        }
+
+        if(eventoBD.eventPlanerId!==req.uid) {
+            return res.status(401).json({
+                ok: false,
+                msg:"No tienes privilegios para modificar este evento"
+            });
+        }
+
+        const deleteEvent = await Events.findOneAndDelete(eventoBD._id)
+        res.status(200).json({
+            ok: true,
+            msg: "Mensaje borrado"
+        })
+
+        
+    } catch (error) {
+        console.log(error);
+        return res.status(401).json({
+                ok:false,
+                msg:"Error al borrar el evento"
+            })
+    }
+}    
+
 
 module.exports = 
 {
     getEvents,
     createEvents,
-    updateEvent
+    updateEvent,
+    deleteEvent 
+    
 }

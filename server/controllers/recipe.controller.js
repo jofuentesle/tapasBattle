@@ -1,7 +1,4 @@
-const { response } = require('express');
 const Recipe = require('../models/recipe.model');
-
-const validarJWT = require('../middelware/validar-jwt');
 
 const getRecipe = async (req, res, next) => {
 
@@ -91,17 +88,26 @@ const deleteRecipe = async (req, res, next ) => {
     const uid = req.params.id
 
     try {
-        const recipe = await Recipe.findById(uid);
-        console.log(recipe);
+        const recipeDB = await Recipe.findById(uid);
         
-        if( !recipe ) {
+        if( !recipeDB ) {
             return res.status(401).json({
                 ok: false,
                 msg:"Error, la receta no existe"
             });
         }
 
-        await recipe.deleteOne({uid});
+        //verificamos q tenga privilegios
+        const chefUid = recipeDB.uidChef;
+    
+        if( chefUid !== req.uid ) {
+            return res.status(401).json({
+                ok: false,
+                msg:'No tienes privilegios para borrar la receta'
+            })
+        }
+
+        const deleteRecipe = await Recipe.findOneAndDelete(recipeDB._id)
 
         res.status(200).json({
             ok: true,

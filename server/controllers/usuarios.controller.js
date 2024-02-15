@@ -97,7 +97,7 @@ const updateUsuarios = async (req, res) => {
 
         res.status(200).json({
             ok: true, 
-            uid
+            userUpdate
         })
         
     } catch (error) {
