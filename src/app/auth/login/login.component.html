@@ -5,17 +5,18 @@
     <div class="wow fadeIn" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeIn;">
         <form
             autocomplete="off"
-            formGroup = "loginForm"
-            (ngSubmit)="onLogin()">
+            [formGroup] = "loginForm"
+            (ngSubmit)="onLogin()"
+            >
             <div class="row g-3">
                 <div class="col-12">
                     <div class="form-floating">
                         <input 
                             type="text" 
                             class="form-control" 
-                            id="user" 
-                            placeholder="Usuario"
-                            
+                            id="email" 
+                            placeholder="Correo electrónico"
+                            formControlName="email"
                             >
                         <label for="name"><span class="m-3 iconBootsrap"><i class="bi bi-person"></i></span>Usuario</label>
                     </div>
@@ -42,6 +43,8 @@
                 </div>
             </div>
         </form>
+
+        
     </div>
     </div>
 </div>    
