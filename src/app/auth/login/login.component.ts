@@ -3,6 +3,8 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 import { Router } from '@angular/router';
 
+import Swal from 'sweetalert2';
+
 //servicio
 import { AuthService } from '../../service/auth.service';
 
@@ -18,29 +20,38 @@ export class LoginComponent implements OnInit {
 
   /*declaramos variables*/
   loginForm: FormGroup;
-  loginDB: Login;
+  public formSubmitted = true;
 
   constructor(  private auth:AuthService,
                 private router: Router,
                 private fb:FormBuilder, ) 
               { }
 
+  ngOnInit(): void {
+
+    //Iniciamos variables del form
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.email, Validators.required ]],
+      password: ['', [Validators.required]]
+    });
+}
+
   onLogin() {
-    console.log("asfasfsafsa");
-    // Handle form submission here
-    //if (this.loginForm.valid) {
+    
+    this.formSubmitted = true;
+    //Verificamos formulario
+    if( this.loginForm.invalid ) {
+      return;
+    }
+
+    //Enviamos petición al server
+    this.auth.loginUser({ ...this.loginForm.value }).subscribe( resp => {
+      console.log(resp);
+    }, (err)=> {
+      console.log(err.error);
+    });
       console.log(this.loginForm.value);
  // }
 }
-
-
-  ngOnInit(): void {
-
-      //Iniciamos variables del form
-      this.loginForm = this.fb.group({
-        email: ['', [Validators.email, Validators.required ]],
-        password: ['', [Validators.required]]
-      });
-  }
 
 }

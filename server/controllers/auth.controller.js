@@ -11,7 +11,6 @@ const loginUsuarios = async (req, res) => {
     try {
         //validar email
         const usuarioDB = await Usuario.findOne({ email });
-        console.log(usuarioDB);
 
         if(!usuarioDB) {
             return res.status(404).json({
@@ -19,11 +18,13 @@ const loginUsuarios = async (req, res) => {
                 ok: false,
                 msg: "Email no válido"
             })
+    
         }
-
+        console.log(usuarioDB.password);
         //validar contraseña
-        const validarPw = bcryptjs.compareSync( password, usuarioDB.password );
-        if ( validarPw ) {
+        const validarPw = bcryptjs.compareSync(password, usuarioDB.password);
+        
+        if ( !validarPw ) {
             return res.status(404).json({
                 ok:false,
                 msg:"Contraseña no válida"
@@ -35,7 +36,8 @@ const loginUsuarios = async (req, res) => {
         
         res.status(200).json({
             ok:true,
-            token
+            token,
+            usuarioDB
         })
     } catch (error) {
         console.log(error);

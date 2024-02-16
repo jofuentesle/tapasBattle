@@ -1,13 +1,12 @@
-export interface User {
-    uid: string;
-    email: string;
-    displayName: string;
-    position?:string;
-    photoURL?: string;
-    rols?: {
-      admin:false,
-      user:true
-    },
-    emailVerified?: boolean;
-    
+export class User {
+
+  constructor(
+    public name:string,
+    public email:string,
+    public position:string,
+    public password?:string,
+    public photoURL?:string,
+    public rols?:string,
+    public uid?:string,
+    ) {}
   }
