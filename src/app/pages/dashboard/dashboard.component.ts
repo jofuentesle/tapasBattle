@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { EventsService } from 'src/app/service/events.service';
 
+import { Event } from '../../models/events.model';
 
 @Component({
   selector: 'app-dashbord',
@@ -8,9 +10,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  public events;
+  public test;
+
+  constructor( private eventsSrv:EventsService ) { }
 
   ngOnInit(): void {
+    this.onLoadEvents();
+  }
+
+  //cargamos eventos
+  async onLoadEvents() {
+    await this.eventsSrv.getEvents().subscribe( res => {
+      this.events = res;
+      this.test = this.events.events;
+      console.log(this.test);
+    })
   }
 
 

@@ -49,6 +49,27 @@ const loginUsuarios = async (req, res) => {
     }
 
 }
+
+const renewToken = (req, res ) => {
+
+    try {
+
+        res.status(200).json({
+            ok: true,
+            msg:'Token renovado!!!'
+        })
+        
+    } catch (error) {
+        console.log(error);
+        return res.status(401).json({
+            ok: false,
+            msg:"Token no renovado"
+        })
+        
+    }
+
+} 
 module.exports = {
-    loginUsuarios
+    loginUsuarios,
+    renewToken
 } 

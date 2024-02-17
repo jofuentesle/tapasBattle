@@ -5,8 +5,10 @@ ruta:/api/login
 const { Router } = require('express');
 const { check } = require('express-validator');
 
-const { loginUsuarios } = require('../controllers/auth.controller');
+const { loginUsuarios, renewToken } = require('../controllers/auth.controller');
 const { validarCampos } = require('../middelware/validar-campos');
+
+const validarJWT = require('../middelware/validar-jwt');
 
 const router = Router();
 
@@ -18,5 +20,8 @@ router.post( '/',
 
     ], 
     loginUsuarios );
+
+//Renovar token para validar rutas
+router.get('/renew', validarJWT, renewToken)    
 
 module.exports =  router ;

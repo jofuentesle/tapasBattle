@@ -6,12 +6,14 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { TapaComponent } from './tapa/tapa.component';
 import { UserComponent } from './user/user.component';
 import { VoteComponent } from './vote/vote.component';
+import { AuthGuard } from '../guard/auth.guard';
 
 export const routes: Routes = [
 
     { 
         path: 'dashboard', 
         component: PagesComponent,
+        canActivate: [ AuthGuard ],
         children: [
     
           { 

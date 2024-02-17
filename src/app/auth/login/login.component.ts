@@ -8,8 +8,6 @@ import Swal from 'sweetalert2';
 //servicio
 import { AuthService } from '../../service/auth.service';
 
-import { Login } from '../../models/login.model';
-
 
 @Component({
   selector: 'app-login',
@@ -27,6 +25,8 @@ export class LoginComponent implements OnInit {
                 private fb:FormBuilder, ) 
               { }
 
+
+
   ngOnInit(): void {
 
     //Iniciamos variables del form
@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
     });
 }
 
-  onLogin() {
+ async onLogin() {
     
     this.formSubmitted = true;
     //Verificamos formulario
@@ -45,13 +45,14 @@ export class LoginComponent implements OnInit {
     }
 
     //Enviamos petición al server
-    this.auth.loginUser({ ...this.loginForm.value }).subscribe( resp => {
-      console.log(resp);
+    await this.auth.loginUser({ ...this.loginForm.value }).subscribe( resp => {
+      
+      this.router.navigateByUrl('/dashboard');
+      
     }, (err)=> {
-      console.log(err.error);
+      //Popup error
+      Swal.fire('Error', err.error.msg, 'error');
     });
-      console.log(this.loginForm.value);
- // }
 }
 
 }

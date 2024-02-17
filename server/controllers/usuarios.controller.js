@@ -39,7 +39,7 @@ const createUsuarios = async (req, res=response) => {
             
             //Encriptar contraseña
             const salt = bcryptjs.genSaltSync();
-            usuario.password = bcryptjs.hashSync('password', salt);
+            usuario.password = bcryptjs.hashSync(password, salt);
             
             //Guardamos usuario
             await usuario.save();
