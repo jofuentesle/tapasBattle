@@ -22,8 +22,8 @@ const loginUsuarios = async (req, res) => {
         }
 
         //validar contraseña
-        const validarPw = bcryptjs.compareSync( password, usuarioDB.password );
-        if ( validarPw ) {
+        const validarPw = bcryptjs.compareSync(password, usuarioDB.password);
+        if ( !validarPw ) {
             return res.status(404).json({
                 ok:false,
                 msg:"Contraseña no válida"

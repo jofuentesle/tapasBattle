@@ -35,22 +35,22 @@ const createUsuarios = async (req, res=response) => {
         }
         
          //Creamos usuario
-            const usuario = new Usuario( req.body );
+        const usuario = new Usuario( req.body );
             
-            //Encriptar contraseña
-            const salt = bcryptjs.genSaltSync();
-            usuario.password = bcryptjs.hashSync('password', salt);
+        //Encriptar contraseña
+        const salt = bcryptjs.genSaltSync();
+        usuario.password = bcryptjs.hashSync(password, salt);
             
-            //Guardamos usuario
-            await usuario.save();
+        //Guardamos usuario
+        await usuario.save();
 
-             //generar JWT
-            const token = await generarJWT( usuario.id);
+            //generar JWT
+        const token = await generarJWT( usuario.id);
 
-            res.status(200).json({
-                ok:true,
-                token
-            })
+        res.status(200).json({
+            ok:true,
+            token
+        })
     } catch (error) {
         res.status(500).json({
             ok:false,

@@ -28,19 +28,19 @@ export class LoginComponent implements OnInit {
   onLogin() {
     console.log("asfasfsafsa");
     // Handle form submission here
-    //if (this.loginForm.valid) {
+    if (this.loginForm.valid) {
       console.log(this.loginForm.value);
- // }
+  }
 }
 
 
   ngOnInit(): void {
 
-      //Iniciamos variables del form
-      this.loginForm = this.fb.group({
-        email: ['', [Validators.email, Validators.required ]],
-        password: ['', [Validators.required]]
-      });
+    //Iniciamos variables del form
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.email, Validators.required ]],
+      password: ['', [Validators.required]]
+    });
   }
 
 }
