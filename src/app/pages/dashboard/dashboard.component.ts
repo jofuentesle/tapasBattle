@@ -10,8 +10,10 @@ import { Event } from '../../models/events.model';
 })
 export class DashboardComponent implements OnInit {
 
-  public events;
-  public test;
+  public events:Event[]=[];
+  
+  public cargando: boolean = true;
+  
 
   constructor( private eventsSrv:EventsService ) { }
 
@@ -21,12 +23,12 @@ export class DashboardComponent implements OnInit {
 
   //cargamos eventos
   async onLoadEvents() {
-    await this.eventsSrv.getEvents().subscribe( res => {
-      this.events = res;
-      this.test = this.events.events;
-      console.log(this.test);
+    await this.eventsSrv.getEvents().subscribe({
+      next: events => {
+        this.events = events.events
+      },
+      error: err=>console.log(err)
     })
   }
-
 
 }

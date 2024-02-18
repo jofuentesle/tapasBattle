@@ -8,11 +8,33 @@ const getEvents = async (req, res=response ) => {
     const events = await Events.find();
 
     res.status(200).json({
-        ok:true,
         events
     })
 }
 
+//obtener evento por id
+const getEventById = async (req, res=response ) => {
+    
+    const uid = req.params.id
+    console.log("hola");
+    
+    try {
+
+        const event = await Event.findById(uid); 
+
+        res.status(200).json({
+            ok: true,
+            event
+        })
+        
+    } catch (error) {
+        return res.status(401).json({
+            ok:false,
+            msg:"Evento no encontrado"
+        })
+        
+    }
+}
 //crear evento
 const createEvents = async ( req, res=response ) => {
     
@@ -140,6 +162,7 @@ const deleteEvent = async (req, res, next) => {
 module.exports = 
 {
     getEvents,
+    getEventById, 
     createEvents,
     updateEvent,
     deleteEvent 

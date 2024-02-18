@@ -38,10 +38,10 @@ export class EventsService {
   }
   
   //obtener eventos
-  getEvents(): Observable<Event> {
+  getEvents(): Observable<any> {
     const token = localStorage.getItem('token') || '';
 
-    return this.http.get(`${ base_url }/events`,
+    return this.http.get<any>(`${ base_url }/events`,
     {
       headers: {
         'x-token': token
@@ -51,5 +51,23 @@ export class EventsService {
           return res;
         })
       )
+  }
+
+  //obtener evento por id
+  public getEventById(uid:string): Observable<any> {
+
+    const token = localStorage.getItem('token') || '';
+
+    return this.http.get<any>(`${ base_url}/events/${ uid }`,
+    {
+      headers: {
+        'x-token': token
+      }
+    }).pipe(
+      tap( (res:any) => {
+        console.log("asdfasfsafasd events");
+        return res;
+      })
+    );
   }
 }

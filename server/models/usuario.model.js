@@ -23,7 +23,7 @@ const UsuarioSchema = new Schema ({
         require: true,
         default: 'USER_ROLE'
     },
-    google: {
+    chefGuest: {
         type: Boolean,
         default: false
     }

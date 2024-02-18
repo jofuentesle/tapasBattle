@@ -17,15 +17,13 @@ const  base_url = environment.base_url;
 export class AuthService {
 
   //variable para los datos
-  public userData$: Observable<User>
+  public userData$: User;
 
   constructor( private http: HttpClient, private router: Router) { }
 
   //Validar token
   validarToken(): Observable<boolean> {
     const token = localStorage.getItem('token') || '';
-
-    console.log(token);
 
     return this.http.get(`${ base_url }/login/renew`, 
     {
@@ -34,6 +32,11 @@ export class AuthService {
       }
     }).pipe(
       tap( (res:any) => {
+
+        const {nombre, email, role, chefGuest,img, uid  } = res;
+        
+        const usuario = new User(nombre, email,'', chefGuest,img, role, uid);
+        
         localStorage.setItem('token', token );
       }),
       map( res => true),

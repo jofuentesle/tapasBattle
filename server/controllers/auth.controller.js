@@ -50,13 +50,23 @@ const loginUsuarios = async (req, res) => {
 
 }
 
-const renewToken = (req, res ) => {
+const renewToken = async (req, res ) => {
+
+    const uid = req.uid;
+
+    //Genereamos token
+    const token = await generarJWT( uid);
+
+    //obtener usuarioDB
+
+    const usuarioDB = await Usuario.findById(uid);
 
     try {
 
         res.status(200).json({
             ok: true,
-            msg:'Token renovado!!!'
+            msg:'Token renovado!!!',
+            usuarioDB
         })
         
     } catch (error) {
