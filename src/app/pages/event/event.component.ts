@@ -17,12 +17,14 @@ export class EventComponent implements OnInit {
   ngOnInit(): void {
 
     let id="65d23cca5c3561bfd95d991d";
+    this.getEventId( this.idEvent );
+    this.idEvent = this.route.snapshot.params[id];
+    console.log(this.idEvent);
   }
 
-  getEventId ( event:any ) {
-    let id="65d23cca5c3561bfd95d991d";
-
-    this.eventSrv.getEventById(id).subscribe(res => {
+  getEventId ( idEvent ) {
+    console.log(idEvent);
+    this.eventSrv.getEventById(idEvent).subscribe(res => {
       console.log('Evento', res);
     })
 

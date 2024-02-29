@@ -18,7 +18,7 @@ export class EventsService {
   constructor( private http: HttpClient, private router: Router) { }
 
    //Validar token
-   validarToken(): Observable<boolean> {
+  validarToken(): Observable<boolean> {
     const token = localStorage.getItem('token') || '';
 
     console.log(token);
@@ -36,9 +36,24 @@ export class EventsService {
       catchError( error => of(false))
     );
   }
+
+  //crear evento
+  createEvent( evento: any ): Observable<any> {
+
+    const token = localStorage.getItem('token') || '';
+    const url = `${ base_url }/events`;
+
+    return this.http.post<any>(url, { evento },
+    {
+      headers: {
+        'x-token': token
+      }
+    }) 
+  }
   
   //obtener eventos
   getEvents(): Observable<any> {
+
     const token = localStorage.getItem('token') || '';
 
     return this.http.get<any>(`${ base_url }/events`,
@@ -54,7 +69,8 @@ export class EventsService {
   }
 
   //obtener evento por id
-  public getEventById(uid:string): Observable<any> {
+  getEventById(uid:string): Observable<any> {
+    
 
     const token = localStorage.getItem('token') || '';
 
@@ -70,4 +86,31 @@ export class EventsService {
       })
     );
   }
+
+updateEvent( event:any ): Observable<any> {
+  
+  const url = `${ base_url }/events/${ event.uid}`;
+  const token = localStorage.getItem('token') || '';
+
+  return this.http.put<Event>(url, { event },
+    {
+    headers: {
+      'x-token': token
+    }
+  })
+}
+
+deleteEvent(): Observable<any> {
+
+  const url = `${ base_url }/events`;
+  const token = localStorage.getItem('token') || '';
+
+  return this.http.delete<Event>(url,
+    {
+    headers: {
+      'x-token': token
+    }
+  })
+}
+
 }

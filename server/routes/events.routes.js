@@ -19,7 +19,12 @@ router.get( '/', validarJWT ,getEvents );
 router.post('/',validarJWT, createEvents );
 
 //buscar evento por id
-router.get('/:id', validarJWT, getEventById );
+router.get('/:id', 
+            [
+                validarJWT,
+                check('El id es obligatorio').notEmpty()
+            ],
+            getEventById );
 
 //actualizar evento
 router.put( '/:id', validarJWT, updateEvent);  

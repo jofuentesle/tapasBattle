@@ -6,10 +6,10 @@ interface _EventsUser {
 export class Event {
 
     constructor(
-        public uid:string,
-        public nombre:string,
-        public fecha:Date,
-        public eventPlanerId?:_EventsUser,
+      public nombre:string,
+      public fecha:Date,
+      public eventPlanerId?:_EventsUser,
+      public uid?:string,
         public img?:string,
         public chefs?:string,
         public guests?:string,

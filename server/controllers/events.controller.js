@@ -13,24 +13,35 @@ const getEvents = async (req, res=response ) => {
 }
 
 //obtener evento por id
-const getEventById = async (req, res=response ) => {
-    
+const getEventById = async (req, res, next) => {
+
     const uid = req.params.id
-    console.log("hola");
-    
+
     try {
+        
+        const eventoBD = await Events.findById(uid);
+        
 
-        const event = await Event.findById(uid); 
+        if (!eventoBD) {
+            return req.status( 404 ).json({
+                ok:false,
+                msg: "Evento no encontrado"
+            });   
+        };
 
+        const eventsById = await Events.findById( uid );
+        
+        console.log("eventes" );
         res.status(200).json({
             ok: true,
-            event
-        })
-        
+            eventsById
+        });
+
     } catch (error) {
+        console.log(error);
         return res.status(401).json({
-            ok:false,
-            msg:"Evento no encontrado"
+            ok: false,
+            msg:"Error al obtener el evento"
         })
         
     }
@@ -55,14 +66,14 @@ const createEvents = async ( req, res=response ) => {
         evento.eventPlanerId = req.uid;
 
         //verificamos al generar events
-        
 
         //Guardamos evento
         await evento.save();
 
         res.status(200).json({
             ok:true,
-            msg:"Evento creado con éxito"
+            msg:"Evento creado con éxito",
+            evento
         });
         
         
