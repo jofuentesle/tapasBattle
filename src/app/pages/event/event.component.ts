@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EventsService } from 'src/app/service/events.service';
 
+import { TapaComponent } from '../tapa/tapa.component';
+
+import { Event } from '../../models/events.model';
+
 @Component({
   selector: 'app-event',
   templateUrl: './event.component.html',
@@ -10,24 +14,37 @@ import { EventsService } from 'src/app/service/events.service';
 export class EventComponent implements OnInit {
 
   public idEvent: string;
+  public event:Event;
+  public onLoad:Boolean = false;
 
   constructor(  private eventSrv:EventsService,
-                private route: ActivatedRoute) { }
+                private route: ActivatedRoute,
+                private router: Router) { }
 
   ngOnInit(): void {
-
-    let id="65d23cca5c3561bfd95d991d";
-    this.getEventId( this.idEvent );
-    this.idEvent = this.route.snapshot.params[id];
-    console.log(this.idEvent);
+   
+    this.getId();
   }
 
-  getEventId ( idEvent ) {
-    console.log(idEvent);
-    this.eventSrv.getEventById(idEvent).subscribe(res => {
-      console.log('Evento', res);
-    })
-
+  //Obtener id
+  async getId() {
+     //Obtenemos id url
+     await this.route.paramMap.subscribe(params => {
+      this.idEvent = params.get("id");
+      });
+      this.getEventId(this.idEvent);
   }
+  
+  //Obtenemos evento por id
+  async getEventId ( idEvent ) {
+    
+    await this.eventSrv.getEventById(idEvent).subscribe({
+      next: event => {
+        this.event = event.eventsById;
+        console.log(event);
+        this.onLoad=true;
+      },
+      error: err=>console.log(err)}
+    )}
 
 }

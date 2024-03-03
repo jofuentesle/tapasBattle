@@ -31,7 +31,6 @@ const getEventById = async (req, res, next) => {
 
         const eventsById = await Events.findById( uid );
         
-        console.log("eventes" );
         res.status(200).json({
             ok: true,
             eventsById

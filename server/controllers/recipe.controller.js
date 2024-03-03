@@ -1,23 +1,68 @@
+const { response } = require('express');
 const Recipe = require('../models/recipe.model');
 
+//obtenemos recetas
 const getRecipe = async (req, res, next) => {
-
-    const recipies = await Recipe.find();
+    
+    const recipes = await Recipe.find();
 
     res.status(200).json({
         ok:true,
-        recipies
+        recipes
     })
 }
 
+//obtenemos receta por id
+const getRecipeById = async (req, res, next) => {
+
+    const uid = req.params.id
+
+    try {
+        
+        const recipeBD = await Recipe.findById(uid);
+
+        console.log("receta id",recipeBD);
+        
+       if (!recipeBD) {
+            return res.status( 404 ).json({
+                ok:false,
+                msg: "Receta no encontrada test"
+            });   
+        };
+        
+        const recipe = await Recipe.findById( uid );
+
+        console.log("controller",recipe);
+        res.status(200).json({
+            ok: true,
+            recipe
+        });
+
+    } catch (error) {
+        console.log(error);
+        return res.status(401).json({
+            ok: false,
+            msg:"Error al obtener la receta"
+        })
+        
+    }
+}
+
 const createRecipe = async (req, res, next) => {
+    const { 
+        nombre,
+        tasteVote,
+        presVote,
+        originVote,
+        img,
+        uidChef
+    } = req.body
 
     try {
 
-        //Creamos usuario
+        //Creamos receta
         const recipe = new Recipe( req.body, req.uid );
-        recipe.uidChef = req.uid
-
+        recipe.uidChef = req.uid;
         //Guardamos receta
         await recipe.save();
 
@@ -70,7 +115,6 @@ const updateRecipe = async (req, res,rext) => {
             msg:"update recipe",
             uid: req.uid
         })
-
         
     } catch (error) {
         console.log(error);
@@ -78,8 +122,7 @@ const updateRecipe = async (req, res,rext) => {
         return res.status(401).json({
             ok:false,
             msg:"Error al actualizar la receta"
-        })
-        
+        }) 
     }
 }
 
@@ -114,7 +157,6 @@ const deleteRecipe = async (req, res, next ) => {
             msg:"Receta borrada"
         })
 
-        
     } catch (error) {
 
         console.log(error);
@@ -125,11 +167,11 @@ const deleteRecipe = async (req, res, next ) => {
         
     }
 
-
 }
 
 module.exports = {
     getRecipe,
+    getRecipeById,
     createRecipe,
     updateRecipe,
     deleteRecipe

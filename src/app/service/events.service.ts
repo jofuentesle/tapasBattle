@@ -8,7 +8,7 @@ import { Observable, of } from  'rxjs';
 import { Event } from '../models/events.model';
 import { environment } from 'src/environments/environment';
 
-const  base_url = environment.base_url;
+const base_url = environment.base_url;
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +30,11 @@ export class EventsService {
       }
     }).pipe(
       tap( (res:any) => {
+
+        const {nombre, fecha, eventPlanerId, uid, img, chefs, guests, recipe } = res;
+        
+        const evento = new Event (nombre, fecha, eventPlanerId, uid, img, chefs, guests, recipe);
+        
         localStorage.setItem('token', token );
       }),
       map( res => true),
@@ -70,19 +75,18 @@ export class EventsService {
 
   //obtener evento por id
   getEventById(uid:string): Observable<any> {
-    
 
     const token = localStorage.getItem('token') || '';
 
     return this.http.get<any>(`${ base_url}/events/${ uid }`,
+    
     {
       headers: {
         'x-token': token
       }
     }).pipe(
       tap( (res:any) => {
-        console.log("asdfasfsafasd events");
-        return res;
+          return res;
       })
     );
   }

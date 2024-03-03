@@ -11,6 +11,7 @@ import { VoteComponent } from './vote/vote.component';
 import { AccountSettingComponent } from './account-setting/account-setting.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { EventComponent } from './event/event.component';
+import { TapaDetailComponent } from './tapa/tapa-detail/tapa-detail.component';
 
 
 
@@ -22,7 +23,8 @@ import { EventComponent } from './event/event.component';
     VoteComponent,
     AccountSettingComponent,
     PerfilComponent,
-    EventComponent
+    EventComponent,
+    TapaDetailComponent
   ],
   imports: [
     CommonModule,

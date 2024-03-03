@@ -1,6 +1,4 @@
 const { Schema, model } = require('mongoose');
-const User = require('./usuario.model');
-const Recipe = require('./recipe.model');
 
 const EventsSchema = new Schema ({
     nombre: {
@@ -12,16 +10,16 @@ const EventsSchema = new Schema ({
         require: true
     },
     fecha: {
-        type: Date,
+        type: Date
     },
     guests: {
-        type: Object,
+        type: Array
     },
     chefs: {
-        type: Object
+        type: Array
     },
     recipe: {
-        type: Object,
+        type: Array
     },
     img: {
         type: String

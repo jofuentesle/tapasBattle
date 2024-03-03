@@ -6,23 +6,24 @@ const RecipeSchema = new Schema ({
         require: true,
         unique: true
     },
-    ingredient: {
-        type: String
+    tasteVote: {
+        type: Array
     },
-    taste: {
-        type: Number
+    presVote: {
+        type: Array
     },
-    presentation: {
-        type: Number
+    originVote: {
+        type: Array
     },
     img: {
         type: String
-
     },
     uidChef: {
         type: String
+    },
+    uidEvent: {
+        type: String
     }
-
 });
 
 RecipeSchema.method('toJSON', function() {

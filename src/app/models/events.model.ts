@@ -1,18 +1,28 @@
-interface _EventsUser {
+interface _EventUser {
   _id: string,
-  nombre: string;
-  img: string;
+  nombre: string,
+  img: string
 }
+
+interface _EventRecipe {
+  _id:string,
+  nombre:string,
+  img?:string,
+  tasteVote?: number,
+  presVote?: number,
+  originVote?: number
+}
+
 export class Event {
 
     constructor(
-      public nombre:string,
-      public fecha:Date,
-      public eventPlanerId?:_EventsUser,
-      public uid?:string,
+        public nombre:string,
+        public fecha:Date,
+        public eventPlanerId?:_EventUser,
+        public uid?:string,
         public img?:string,
-        public chefs?:string,
-        public guests?:string,
-        public recipe?:string,
+        public chefs?:_EventUser[],
+        public guests?:_EventUser[],
+        public recipe?:_EventRecipe[],
       ) {}
     }

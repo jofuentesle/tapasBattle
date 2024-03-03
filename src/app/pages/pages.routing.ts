@@ -10,6 +10,7 @@ import { AuthGuard } from '../guard/auth.guard';
 import { AccountSettingComponent } from './account-setting/account-setting.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { EventComponent } from './event/event.component';
+import { TapaDetailComponent } from './tapa/tapa-detail/tapa-detail.component';
 
 export const routes: Routes = [
 
@@ -22,9 +23,13 @@ export const routes: Routes = [
           { 
             path: '', 
             component: DashboardComponent },
-          {
-            path: 'tapa',
-            component: TapaComponent
+            {
+              path: 'recipes',
+              component: TapaComponent
+            },
+            {
+            path: 'recipes/:uid',
+            component: TapaDetailComponent
           },
           {
             path: 'vote',
