@@ -1,5 +1,8 @@
 <div class="container">
     <div class="row">
+        <div class="col-12">
+            
+        </div>
         <div class="col-12"> 
             <div 
             *ngIf="onLoad"
@@ -11,11 +14,24 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <h3>
-                        <app-tapa
-                            idEvent={{event.uid}}
-                        ></app-tapa>
-                    </h3>
+                    <div>
+                        <div>
+                            <h4>Organizador</h4>
+                            <img [src]="" alt="organizador"/>
+                        </div>
+                        
+                        <h3>Ubicación</h3>
+                        <h4>
+                            <span class="m-2">
+                                <i class="bi bi-calendar3"></i>
+                            </span>
+                            {{event.fecha | date: 'dd/MM/yyyy'}}
+                        </h4>
+                    </div>
+                    <app-tapa
+                        idEvent={{event.uid}}
+                    ></app-tapa>
+
                     <div>
                         <img src={{event.img}} alt=""/>
                     </div>
