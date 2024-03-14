@@ -17,10 +17,10 @@ export class User {
     get getImgUrl() {
 
       if ( this.img ) {
-        return `${ base_url}/usuarios/${this.img}`;
+        return `${ base_url}/upload/usuarios/${this.img}`;
 
       } else {
-        return `${ base_url}/usuarios/no-image`;
+        return `${ base_url}/upload/usuarios/no-image`;
       }
 
       return '';

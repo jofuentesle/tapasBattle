@@ -5,3 +5,8 @@
 .pointer {
     cursor:pointer;
 }
+
+.avatarImg {
+    width: 3rem;
+    height: 3rem;
+}

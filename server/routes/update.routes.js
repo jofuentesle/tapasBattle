@@ -6,7 +6,7 @@ const { Router } = require('express');
 const { check } = require('express-validator');
 
 const expressfileUpload = require('express-fileupload');
-const { fileUpload } = require('../controllers/upload.controller')
+const { fileUpload, getFile } = require('../controllers/upload.controller')
 const { validarCampos } = require('../middelware/validar-campos');
 
 const validarJWT = require('../middelware/validar-jwt');
@@ -16,8 +16,12 @@ const router = Router();
 //validamos 
 router.use(expressfileUpload());
 
+//Guardar img
+router.put( '/:tipo/:id',validarJWT, fileUpload);
 
-router.put( '/:tipo/:id', fileUpload);
+//Obtener img url
+router.get('/:tipo/:foto', validarJWT,  getFile);
+
 
 
 //Exportamos router

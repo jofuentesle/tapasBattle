@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { EventsService } from 'src/app/service/events.service';
 
+import Swal from 'sweetalert2';
+
 import { Event } from '../../models/events.model';
 
 @Component({
@@ -31,4 +33,9 @@ export class DashboardComponent implements OnInit {
     })
   }
 
+  //crear evento
+  createEvent() {
+    
+    Swal.fire('Error', 'No se pueden crear eventos', 'error');
+  }
 }

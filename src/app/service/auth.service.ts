@@ -33,9 +33,10 @@ export class AuthService {
     }).pipe(
       tap( (res:any) => {
 
-        const {nombre, email, role, chefGuest,img, uid  } = res;
-        
-        const usuario = new User(nombre, email,'', chefGuest,img, role, uid);
+        //recuperamos datos usuario logeado
+        const {nombre, email, role, chefGuest,img, uid  } = res.usuarioDB;
+        this.userData$ = new User(nombre, email,'', chefGuest,img, role, uid);
+        console.log(this.userData$)
         
         localStorage.setItem('token', token );
       }),

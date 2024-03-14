@@ -9,10 +9,23 @@ import { AuthService } from 'src/app/service/auth.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor( private router:Router,
-                private authSrv:AuthService ) { }
+  public imgUrl = '';
 
+  constructor(  private router:Router,
+                private authSrv:AuthService ) { 
+
+                  this.getUrl();
+
+                }
+
+  getUrl = async () => {
+
+    this.imgUrl = await this.authSrv.userData$.getImgUrl;
+    console.log(this.imgUrl);
+
+  }
   ngOnInit(): void {
+    this.getUrl();
   }
 
   onLogOut() {

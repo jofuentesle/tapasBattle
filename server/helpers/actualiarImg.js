@@ -15,21 +15,22 @@ const borrarImg = ( path ) => {
 
 const actualiarImg = async ( tipo, id, nombreArchivo ) => {
 
-    let patViejo = '';
 
     switch( tipo ) {
 
         case 'usuarios':
             const usuario = await Usuario.findById(id);
-            console.log(usuario.img);
             if( !usuario ) {
                 console.log('No se encontró el usuario')
                 return false
             }  
 
-            pathViejo = `./upload/usuarios/${ usuario.img}`;
-            borrarImg(pathViejo);
-            console.log(pathViejoU);
+            const pathViejoU = `./upload/usuarios/${ usuario.img}`;
+            
+            if ( fs.existsSync( pathViejoU )) {
+                //borrar imagen anterior
+                fs.unlinkSync( pathViejoU );
+            }
 
             usuario.img = nombreArchivo;
             
@@ -46,8 +47,11 @@ const actualiarImg = async ( tipo, id, nombreArchivo ) => {
                 return false
             }  
 
-            pathViejo = `./upload/recetas/${ receta.img}`;
-            borrarImg(pathViejo);
+            const pathViejoR = `./upload/recetas/${ receta.img}`;
+            if ( fs.existsSync( pathViejoR )) {
+                //borrar imagen anterior
+                fs.unlinkSync( pathViejoR );
+            }
 
             receta.img = nombreArchivo;
             
@@ -65,7 +69,10 @@ const actualiarImg = async ( tipo, id, nombreArchivo ) => {
             }  
 
             const pathViejo = `./upload/eventos/${ evento.img}`;
-            borrarImg(pathViejo);
+            if ( fs.existsSync( pathViejo )) {
+                //borrar imagen anterior
+                fs.unlinkSync( pathViejo );
+            }
 
             evento.img = nombreArchivo;
             

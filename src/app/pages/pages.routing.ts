@@ -8,7 +8,7 @@ import { UserComponent } from './user/user.component';
 import { VoteComponent } from './vote/vote.component';
 import { AuthGuard } from '../guard/auth.guard';
 import { AccountSettingComponent } from './account-setting/account-setting.component';
-import { PerfilComponent } from './perfil/perfil.component';
+import { PerfilComponent } from './user/perfil/perfil.component';
 import { EventComponent } from './event/event.component';
 import { TapaDetailComponent } from './tapa/tapa-detail/tapa-detail.component';
 
@@ -18,8 +18,7 @@ export const routes: Routes = [
         path: 'dashboard', 
         component: PagesComponent,
         canActivate: [ AuthGuard ],
-        children: [
-    
+        children: [    
           { 
             path: '', 
             component: DashboardComponent },
