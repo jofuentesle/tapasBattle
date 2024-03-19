@@ -34,7 +34,6 @@ const { actualiarImg } = require('../helpers/actualiarImg');
         const file = req.files.imagen;
 
         const nombreCortado = file.name.split('.');
-        console.log(nombreCortado);
         const extension = nombreCortado[ nombreCortado.length - 1 ];
 
         //Validar extension
@@ -67,7 +66,7 @@ const { actualiarImg } = require('../helpers/actualiarImg');
 
             res.status(200).json({
                 ok: true,
-                msg: nombreArchivo
+                nombreArchivo
             })
         });
     } 

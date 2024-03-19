@@ -19,13 +19,16 @@ const actualiarImg = async ( tipo, id, nombreArchivo ) => {
     switch( tipo ) {
 
         case 'usuarios':
+            
             const usuario = await Usuario.findById(id);
+            
             if( !usuario ) {
                 console.log('No se encontró el usuario')
                 return false
-            }  
+            }
 
             const pathViejoU = `./upload/usuarios/${ usuario.img}`;
+
             
             if ( fs.existsSync( pathViejoU )) {
                 //borrar imagen anterior
@@ -64,7 +67,7 @@ const actualiarImg = async ( tipo, id, nombreArchivo ) => {
         
         const evento = await Events.findById(id);
             if( !evento ) {
-                console.log('No se econtró médico')
+                console.log('No se econtró evento')
                 return false
             }  
 

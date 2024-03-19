@@ -25,12 +25,11 @@ router.post( '/',
 router.put( '/:id', 
         [
             validarJWT,
-            check('nombre','El nombre es obligatorio').notEmpty(),
-            check('email','El email no es correcto').isEmail(),
-            check('role', 'El rol es obligatorio'),
+            //check('nombre','El nombre es obligatorio para actualizar').notEmpty(),
+            //check('email','El email no es correcto').isEmail(),
             validarCampos
             
         ], 
-updateUsuarios );
+    updateUsuarios );
 
 module.exports =  router;

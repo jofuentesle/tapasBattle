@@ -1,39 +1,51 @@
 <div class="container mt-4 mb-4 p-3 d-flex justify-content-center"> 
     <div class="card p-4"> 
-        <div class=" image d-flex flex-column justify-content-center align-items-center"> 
-            
-                <img 
-                    [src]= imgUrl
-                    height="100" 
-                    width="100" 
-                />
-            
-            <span class="name mt-3">{{currentUser.nombre}}</span> 
-            <span class="idd">@eleanorpena</span> 
-            <div class="d-flex flex-row justify-content-center align-items-center gap-2"> 
-                <span class="idd1">Oxc4c16a645_b21a</span> 
-                <span><i class="fa fa-copy"></i></span> 
-            </div> 
-            <div class="d-flex flex-column bd-highlight mt-3"> 
-                <div class="d-flex align-items-center gap-2">
-                    <h5>Asistencias</h5>
-                    <p>3</p>
-                </div> 
-                <div class="d-flex align-self-end gap-2">   
-                    <h5>Concursos</h5>
-                    <p>4</p>
-                </div>
-                <div class="d-flex align-items-center gap-2">    
-                    <h5>Premios</h5>
-                    <p>8</p>
-                </div>    
+        <div class="card-body">
+            <div class=" image d-flex flex-column justify-content-center align-items-center"> 
+                
+                    <img 
+                        [src]= imgUrl
+                        height="100" 
+                        width="100" 
+                    />
+                
+                <h4>Imagen de usuario</h4>
+                <img src="">
 
+                <label>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path d="M320 367.79h76c55 0 100-29.21 100-83.6s-53-81.47-96-83.6c-8.89-85.06-71-136.8-144-136.8-69 0-113.44 45.79-128 91.2-60 5.7-112 43.88-112 106.4s54 106.4 120 106.4h56" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M320 255.79l-64-64-64 64M256 448.21V207.79"/></svg>
+                    <input type="file">
+                  </label>
+                <hr>
+                
+                    
+                <span class="name mt-3">{{currentUser.nombre}}</span> 
+                <span class="idd">@eleanorpena</span> 
+                <div class="d-flex flex-row justify-content-center align-items-center gap-2"> 
+                    <span class="idd1">Oxc4c16a645_b21a</span> 
+                    <span><i class="fa fa-copy"></i></span> 
+                </div> 
+                <div class="d-flex flex-column bd-highlight mt-3"> 
+                    <div class="d-flex align-items-center gap-2">
+                        <h5>Asistencias</h5>
+                        <p>3</p>
+                    </div> 
+                    <div class="d-flex align-self-end gap-2">   
+                        <h5>Concursos</h5>
+                        <p>4</p>
+                    </div>
+                    <div class="d-flex align-items-center gap-2">    
+                        <h5>Premios</h5>
+                        <p>8</p>
+                    </div>    
+
+                </div> 
+                <div class=" d-flex mt-2"> 
+                    <button class="btn1 btn-dark">
+                        Edit Profile
+                    </button> 
+                </div>  
             </div> 
-            <div class=" d-flex mt-2"> 
-                <button class="btn1 btn-dark">
-                    Edit Profile
-                </button> 
-            </div>  
-        </div> 
+        </div>
     </div>
 </div>

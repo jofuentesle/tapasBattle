@@ -21,6 +21,8 @@ const getUsuarios = async (req, res) => {
 const createUsuarios = async (req, res=response) => {
 
     const { email, password } = req.body;
+    req.body.img = 'no-image-png'
+
 
     try {
 
@@ -34,30 +36,29 @@ const createUsuarios = async (req, res=response) => {
             })
         }
         
-         //Creamos usuario
-            const usuario = new Usuario( req.body );
-            
-            //Encriptar contraseña
-            const salt = bcryptjs.genSaltSync();
-            usuario.password = bcryptjs.hashSync(password, salt);
-            
-            //Guardamos usuario
-            await usuario.save();
+         //Creamos usuario  
+        const usuario = new Usuario( req.body );
+        
+        //Encriptar contraseña
+        const salt = bcryptjs.genSaltSync();
+        usuario.password = bcryptjs.hashSync(password, salt);
+        
+        //Guardamos usuario
+        await usuario.save();
 
-             //generar JWT
-            const token = await generarJWT( usuario.id);
+        //generar JWT
+        const token = await generarJWT( usuario.id);
 
-            res.status(200).json({
-                ok:true,
-                token
-            })
+        res.status(200).json({
+            ok:true,
+            token
+        })
     } catch (error) {
         res.status(500).json({
             ok:false,
             msg:"Error"
         })
     }
-
 }
 
 const updateUsuarios = async (req, res) => {
@@ -70,13 +71,15 @@ const updateUsuarios = async (req, res) => {
 
         if (!usuarioDB) {
             return req.status( 404 ).json({
-
                 ok:false,
                 msg: "Usuarios no encontrado"
             });   
         }
-            //Actualizamos usuario
-            const campos = req.body;
+        
+        //Actualizamos usuario
+        const campos = req.body;
+        console.log(campos);
+
         if ( usuarioDB.email === req.body.email) {
             delete campos.email;
 
@@ -104,7 +107,8 @@ const updateUsuarios = async (req, res) => {
 
         res.status(500).json({
             ok:false,
-            msg:"Error"
+            msg:"Errordddd",
+            body: uid
         })
         
     }

@@ -17,7 +17,7 @@ export class Event {
 
     constructor(
         public nombre:string,
-        public fecha:Date,
+        public Date,
         public eventPlanerId?:_EventUser,
         public uid?:string,
         public img?:string,

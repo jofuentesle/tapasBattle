@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/models/user.model';
+import { AuthService } from 'src/app/service/auth.service';
 
 
 @Component({
@@ -8,9 +10,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserComponent implements OnInit {
 
-  constructor() { }
+  public currentUser: User;
+
+  constructor( public authSrv:AuthService ) { 
+
+  }
 
   ngOnInit(): void {
+    //obtenemos usuario logeado
+    this.currentUser = this.authSrv.userData$;
+
   }
 
 }

@@ -20,7 +20,6 @@ const loginUsuarios = async (req, res) => {
             })
     
         }
-        console.log(usuarioDB.password);
         //validar contraseña
         const validarPw = bcryptjs.compareSync(password, usuarioDB.password);
         

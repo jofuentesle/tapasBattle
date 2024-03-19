@@ -4,6 +4,8 @@ import { EventsService } from 'src/app/service/events.service';
 import Swal from 'sweetalert2';
 
 import { Event } from '../../models/events.model';
+import { User } from 'src/app/models/user.model';
+import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-dashbord',
@@ -13,11 +15,15 @@ import { Event } from '../../models/events.model';
 export class DashboardComponent implements OnInit {
 
   public events:Event[]=[];
+  public currentUser:User;
   
   public cargando: boolean = true;
   
 
-  constructor( private eventsSrv:EventsService ) { }
+  constructor(  private eventsSrv:EventsService,
+                private authSrv:AuthService ) { 
+                  this.currentUser = authSrv.userData$;
+                }
 
   ngOnInit(): void {
     this.onLoadEvents();

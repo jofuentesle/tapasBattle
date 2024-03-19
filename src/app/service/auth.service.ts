@@ -7,6 +7,7 @@ import { Observable, of } from  'rxjs';
 
 import { User } from '../models/user.model';
 import { LoginForm } from '../interfices/login.interfices';
+import { AccountForm } from '../interfices/account.interface';
 import { environment } from 'src/environments/environment';
 
 const  base_url = environment.base_url;
@@ -21,32 +22,50 @@ export class AuthService {
 
   constructor( private http: HttpClient, private router: Router) { }
 
+  //Obtenemos token
+  get token ():string {
+    return localStorage.getItem('token') || '';
+  }
+
+  //Obtenemos uid
+  get uid ():string {
+    return this.userData$.uid || '';
+  }
+
   //Validar token
   validarToken(): Observable<boolean> {
-    const token = localStorage.getItem('token') || '';
 
     return this.http.get(`${ base_url }/login/renew`, 
     {
       headers: {
-        'x-token': token
+        'x-token': this.token
       }
     }).pipe(
       tap( (res:any) => {
-
+  
         //recuperamos datos usuario logeado
         const {nombre, email, role, chefGuest,img, uid  } = res.usuarioDB;
         this.userData$ = new User(nombre, email,'', chefGuest,img, role, uid);
-        console.log(this.userData$)
+        localStorage.setItem('token', this.token );
         
-        localStorage.setItem('token', token );
       }),
       map( res => true),
       catchError( error => of(false))
     );
   } 
 
+  //Actualizar usuario
+  updateAccount( formData: AccountForm  ) {
+
+    return this.http.put(`${ base_url }/usuarios/${this.uid}`, ({nombre:formData.nombre, email:formData.email })
+               ,{
+                headers: {
+                'x-token': this.token
+                }}); 
+    }
+
   //Login user
- loginUser( formData: LoginForm ) {
+  loginUser( formData: LoginForm ) {
     return this.http.post(`${ base_url }/login`,(formData))
                 .pipe(
                   tap ( (res:any) => {
@@ -57,8 +76,15 @@ export class AuthService {
                 
  }
 
- logOut() {
+  //Obtener todos los usuarios
+  getAllUser() {
+
+    //return this.http.get(`${base_url}/usuarios`);
+
+ }
+
+  logOut() {
   localStorage.removeItem('token');
   this.router.navigateByUrl('/login');
- }
+}
 }

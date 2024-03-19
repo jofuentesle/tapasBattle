@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app.routing.module';
 import { AuthModule } from './auth/auth.module'
 import { SharedModule } from './shared/shared.module';
 import { PagesModule } from './pages/pages.module';
+import { UserModule } from './pages/user/user.module';
 
 import { PagesComponent } from './pages/pages.component';
 import { AppComponent } from './app.component';
@@ -32,6 +33,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AuthModule,
     PagesModule,
     SharedModule,
+    UserModule,
     NgbModule
     
   ],

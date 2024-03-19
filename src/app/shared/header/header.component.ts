@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/service/auth.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-header',
@@ -10,22 +12,22 @@ import { AuthService } from 'src/app/service/auth.service';
 export class HeaderComponent implements OnInit {
 
   public imgUrl = '';
-
+  public user: User;
+  public url = '';
   constructor(  private router:Router,
                 private authSrv:AuthService ) { 
-
-                  this.getUrl();
-
+                
+                  this.user =  this.authSrv.userData$;
+                  this.url = this.user.getImgUrl;
+                  
+                  this.imgUrl='http://localhost:3000/api/upload/usuarios/';
+                  
                 }
-
-  getUrl = async () => {
-
-    this.imgUrl = await this.authSrv.userData$.getImgUrl;
-    console.log(this.imgUrl);
-
-  }
+  
+ 
+  
   ngOnInit(): void {
-    this.getUrl();
+   
   }
 
   onLogOut() {

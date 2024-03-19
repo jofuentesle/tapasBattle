@@ -20,7 +20,7 @@ router.use(expressfileUpload());
 router.put( '/:tipo/:id',validarJWT, fileUpload);
 
 //Obtener img url
-router.get('/:tipo/:foto', validarJWT,  getFile);
+router.get('/:tipo/:foto', getFile);
 
 
 

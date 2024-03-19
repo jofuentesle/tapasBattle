@@ -1,1 +1,81 @@
-<p>account-setting works!</p>
+<div class="container mt-4 mb-4 p-3 d-flex justify-content-center"> 
+     <form 
+        [formGroup]="accountForm"
+        (ngSubmit)="updateAccount()"
+        >
+        <div class="card p-4"> 
+            <div class="card-body">
+                <div class=" image d-flex flex-column justify-content-center align-items-center"> 
+                        <img 
+                            *ngIf="viewImg"
+                            [src]= currentUser.getImgUrl
+                            height="100" 
+                            width="100" 
+                            class="avatar"
+                        />
+                        <img 
+                            *ngIf="!viewImg"
+                            [src]= imgTemp
+                            height="100" 
+                            width="100" 
+                            class="avatar"
+                        />
+                    <h4>Imagen de usuario</h4>
+                    <img src="">
+                    <label>
+                        <!--<svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path d="M320 367.79h76c55 0 100-29.21 100-83.6s-53-81.47-96-83.6c-8.89-85.06-71-136.8-144-136.8-69 0-113.44 45.79-128 91.2-60 5.7-112 43.88-112 106.4s54 106.4 120 106.4h56" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M320 255.79l-64-64-64 64M256 448.21V207.79"/></svg>-->
+                        <input  type="file"
+                                (change)="cambiarImagen($event)"
+                        >
+                    </label>
+                    <hr>
+                    <div>
+                        <div class="form-floating">
+                            <label for="name">
+                                <span class="m-3 iconBootsrap">
+                                    <i class="bi bi-person"></i>
+                                </span>Usuarios
+                            </label>
+                            <input 
+                                type="text" 
+                                class="form-control" 
+                                id="name" 
+                                placeholder="Nombre"
+                                value="currentUser.nombre"
+                                formControlName="nombre"
+                            >
+                        </div>
+                        <div class="form-floating">
+                            <input 
+                                type="text" 
+                                class="form-control" 
+                                id="email" 
+                                placeholder=""
+                                value="{{currentUser.email}}"
+                                formControlName="email"
+                            >
+                            <label for="name">
+                                <span class="m-3 iconBootsrap">
+                                    <i class="bi bi-person"></i>
+                                </span>Email
+                            </label>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-row justify-content-center align-items-center gap-2"> 
+                    </div> 
+                    <div class="d-flex flex-column mt-2">
+                        <button 
+                                [disabled]="accountForm.invalid"
+                                type="submit" 
+                                class="btn btn-block btn-dark">
+                            <span class="iconStyle">
+                                <!--<svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><path d="M380.93 57.37A32 32 0 00358.3 48H94.22A46.21 46.21 0 0048 94.22v323.56A46.21 46.21 0 0094.22 464h323.56A46.36 46.36 0 00464 417.78V153.7a32 32 0 00-9.37-22.63zM256 416a64 64 0 1164-64 63.92 63.92 0 01-64 64zm48-224H112a16 16 0 01-16-16v-64a16 16 0 0116-16h192a16 16 0 0116 16v64a16 16 0 01-16 16z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/></svg>-->   
+                            </span>
+                            Guardar cambios
+                        </button> 
+                    </div>  
+                </div> 
+            </div>
+        </div>
+    </form>    
+</div>

@@ -8,9 +8,10 @@ import { UserComponent } from './user/user.component';
 import { VoteComponent } from './vote/vote.component';
 import { AuthGuard } from '../guard/auth.guard';
 import { AccountSettingComponent } from './account-setting/account-setting.component';
-import { PerfilComponent } from './user/perfil/perfil.component';
 import { EventComponent } from './event/event.component';
+import { NewEventComponent } from './new-event/new-event.component';
 import { TapaDetailComponent } from './tapa/tapa-detail/tapa-detail.component';
+import { NofoundComponent } from './nofound/nofound.component';
 
 export const routes: Routes = [
 
@@ -39,24 +40,25 @@ export const routes: Routes = [
           path: 'user',
           component: UserComponent,
           children: [
-    
-          { path: '', 
-            component: UserComponent 
-          }
+              { path: '', 
+                component: UserComponent 
+              }
             ]
           },
           {
-            path: 'account-settings',
+            path: 'user/account-settings',
             component: AccountSettingComponent
           },
           {
-            path: 'perfil',
-            component: PerfilComponent
+            path: 'event/:id',
+            component: EventComponent,
+            
           },
           {
-            path: 'event/:id',
-            component: EventComponent
+            path: 'new-evnet',
+            component: NewEventComponent
           },
+          { path: '**', component:NofoundComponent },
           
         ]
     }

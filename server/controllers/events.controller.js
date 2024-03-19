@@ -57,6 +57,7 @@ const createEvents = async ( req, res=response ) => {
         recipe,
         img
     } = req.body
+    req.body.img= 'no-image.png';
 
     try {
 
@@ -86,6 +87,7 @@ const createEvents = async ( req, res=response ) => {
     }
 }
 
+//Actualizamos evento
 const updateEvent = async (req, res, next) => {
 
     const uid = req.params.id
@@ -100,14 +102,14 @@ const updateEvent = async (req, res, next) => {
                 msg: "Evento no encontrado"
             });   
         };
-
+        /*
         if(eventoBD.eventPlanerId!==req.uid) {
             return res.status(401).json({
                 ok: false,
                 msg:"No tienes privilegios para modificar este evento"
             });
         }
-
+        */
         //Actualizamos evento
         const campos = req.body;
 
