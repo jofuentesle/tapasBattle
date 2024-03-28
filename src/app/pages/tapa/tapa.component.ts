@@ -23,13 +23,13 @@ export class TapaComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.idEvent;
+    //this.idEvent;
 
-    this.getRecipes();
+    //this.getRecipes();
 
     }
 
-  //cargamos recetas
+  /*cargamos recetas
   async getRecipes() {
     await this.recipeSrv.getRecipes().subscribe({
       next: recipes => {
@@ -38,7 +38,7 @@ export class TapaComponent implements OnInit {
       },
       error: err=>console.log(err)
     })
-  }
+  }*/
 
 
   //Obtener id

@@ -22,8 +22,6 @@ export class EventsService {
   validarToken(): Observable<boolean> {
     const token = localStorage.getItem('token') || '';
 
-    console.log(token);
-
     return this.http.get(`${ base_url }/events`, 
     {
       headers: {
@@ -32,10 +30,6 @@ export class EventsService {
     }).pipe(
       tap( (res:any) => {
 
-        const {nombre, fecha, eventPlanerId, uid, img, chefs, guests, recipe } = res;
-        
-        const evento = new Event (nombre, fecha, eventPlanerId, uid, img, chefs, guests, recipe);
-        
         localStorage.setItem('token', token );
       }),
       map( res => true),
@@ -47,9 +41,10 @@ export class EventsService {
   createEvent( evento: any ): Observable<any> {
 
     const token = localStorage.getItem('token') || '';
-    const url = `${ base_url }/events`;
+    const url = `${ base_url }/events`;  
 
-    return this.http.post<any>(url, { evento },
+
+    return this.http.post<any>(url,  evento,
     {
       headers: {
         'x-token': token
@@ -87,7 +82,7 @@ export class EventsService {
       }
     }).pipe(
       tap( (res:any) => {
-          return res;
+          return res.eventsById;
       })
     );
   }

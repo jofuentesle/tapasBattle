@@ -17,7 +17,7 @@ import { User } from 'src/app/models/user.model';
 export class EventComponent implements OnInit {
 
   public idEvent: string;
-  public event:Event;
+  public currentEvent:Event;
   public onLoad:Boolean = false;
   public currentUser:User;
   public guests:User[];
@@ -51,8 +51,7 @@ export class EventComponent implements OnInit {
     
     await this.eventSrv.getEventById(idEvent).subscribe({
       next: event => {
-        this.event = event;
-        console.log(event);
+        this.currentEvent = event.eventsById;
         this.onLoad=true;
       },
       error: err=>console.log(err)}
@@ -60,9 +59,9 @@ export class EventComponent implements OnInit {
 
  
   confirmarAsistencia() {
-    console.log(this.event);
+    console.log(this.currentEvent);
     
-    this.event = {
+    this.currentEvent = {
     chefs: [],
     eventPlanerId: null,
     Date: toString,
@@ -72,7 +71,7 @@ export class EventComponent implements OnInit {
     recipe: [],
     uid: "65e484acaca6be4cf396b2ef"
   }
-    this.eventSrv.updateEvent(this.event).subscribe(resp => {
+    this.eventSrv.updateEvent(this.currentEvent).subscribe(resp => {
       console.log(resp)
     
     })

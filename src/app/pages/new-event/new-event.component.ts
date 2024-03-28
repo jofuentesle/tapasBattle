@@ -35,19 +35,23 @@ export class NewEventComponent implements OnInit {
   async newEvent() {
     
     this.formSubmitted = true;
+    
     //Verificamos formulario
     if( this.eventForm.invalid ) {
       return;
     }
+    
+    console.log("fecha",this.eventForm.value.fecha);
     //Enviamos petición al server
     this.eventForm.value.eventPlanerId = this.currentUser.uid;
+    
     await this.eSrv.createEvent({ ...this.eventForm.value }).subscribe({
       next: events => {
         
         Swal.fire('Evento creado con éxito', events.nombre, 'success');
         this.currentEvent = events;
 
-        this.router.navigateByUrl(`/dashboard/event-details/${ events.evento.uid }`);
+        this.router.navigateByUrl(`/dashboard/event/${ events.evento.uid }`);
       },
       
         error: err=>{

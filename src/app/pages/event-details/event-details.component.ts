@@ -21,6 +21,7 @@ export class EventDetailsComponent implements OnInit {
    allUsers:any;
    eventForm: FormGroup;
    currentEvent:any
+   idEvent:string;
    public formSubmitted = true;
 
 
@@ -31,15 +32,25 @@ export class EventDetailsComponent implements OnInit {
                 private route: ActivatedRoute,
                 private fb:FormBuilder,) { }
 
-  async getEventById() {
+  //Obtener id
+  async getId() {
+  //Obtenemos id url
+  await this.route.paramMap.subscribe(params => {
+    
+    this.idEvent = params.get("uid");
+    console.log(this.idEvent)
+    });
+    this.getEventById(this.idEvent)
+ }              
 
-      
-      this.currentEvent = this.eSrv.getEventById('').subscribe({
+  async getEventById(idEvent) {
+
+      this.currentEvent = this.eSrv.getEventById(idEvent).subscribe({
       next: events => {
         
         //Swal.fire('Evento creado con éxito', events.nombre, 'success');
-        this.currentEvent = events.eventsById;
-        console.log(this.currentEvent);
+        this.currentEvent = events.events;
+        console.log('hola',this.currentEvent);
         
 
         //this.router.navigateByUrl(`/dashboard/event-details/${ events.uid }`);
@@ -52,12 +63,12 @@ export class EventDetailsComponent implements OnInit {
 
   }
 
+//Obtenemos usuarios
 async  getUsers () {
 
     this.allUsers = this.auth.getAllUser().subscribe({
       next: (res:any) => {
         this.allUsers = res.usuarios;
-        console.log(this.allUsers);
       },
       error: err=>console.log(err)}
       )}
@@ -66,8 +77,8 @@ async  getUsers () {
 
   ngOnInit(): void {
 
-    this.getEventById();
     this.getUsers();
+    this.getId()
   }
 
 }
