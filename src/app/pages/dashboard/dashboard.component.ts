@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { EventsService } from 'src/app/service/events.service';
 
 import Swal from 'sweetalert2';
@@ -21,7 +23,8 @@ export class DashboardComponent implements OnInit {
   
 
   constructor(  private eventsSrv:EventsService,
-                private authSrv:AuthService ) { 
+                private authSrv:AuthService,
+                private router:Router ) { 
                   this.currentUser = authSrv.userData$;
                 }
 
@@ -42,6 +45,8 @@ export class DashboardComponent implements OnInit {
   //crear evento
   createEvent() {
     
-    Swal.fire('Error', 'No se pueden crear eventos', 'error');
+    this.router.navigateByUrl('dashboard/new-event');
+
+    //Swal.fire('Error', 'No se pueden crear eventos', 'error');
   }
 }

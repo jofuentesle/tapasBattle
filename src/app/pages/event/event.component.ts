@@ -51,18 +51,14 @@ export class EventComponent implements OnInit {
     
     await this.eventSrv.getEventById(idEvent).subscribe({
       next: event => {
-        this.event = event.eventsById;
+        this.event = event;
         console.log(event);
         this.onLoad=true;
       },
       error: err=>console.log(err)}
     )}
 
-  //crear evento
-  createEvent() {
-    
-  }
-
+ 
   confirmarAsistencia() {
     console.log(this.event);
     

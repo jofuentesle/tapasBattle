@@ -12,6 +12,7 @@ import { EventComponent } from './event/event.component';
 import { NewEventComponent } from './new-event/new-event.component';
 import { TapaDetailComponent } from './tapa/tapa-detail/tapa-detail.component';
 import { NofoundComponent } from './nofound/nofound.component';
+import { EventDetailsComponent } from './event-details/event-details.component';
 
 export const routes: Routes = [
 
@@ -55,8 +56,12 @@ export const routes: Routes = [
             
           },
           {
-            path: 'new-evnet',
+            path: 'new-event',
             component: NewEventComponent
+          },
+          {
+            path: 'event-details/:uid',
+            component: EventDetailsComponent
           },
           { path: '**', component:NofoundComponent },
           

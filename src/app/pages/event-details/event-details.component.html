@@ -1,0 +1,51 @@
+<div class="container">
+    <form action="">
+        <div class="d-flex flex-column">
+            <h2>
+            
+            </h2>
+            <div class="car">
+                <div class="car-body">
+                    <h4>fecha:<span></span></h4>
+                </div>
+
+            </div>
+        </div>
+        <div class="d-flex flex-column">
+            <div>
+                <h4>Dirección:</h4>
+                <div>
+                    <h3>¿Quieres invitar a usuarsio?</h3>
+                    <div>
+                        <h5>Usuarios disponibles</h5>
+                        <div *ngFor="let user of allUsers">
+                            <div>
+                                <img    class="img-fluid avatar-md rounded-circle avatarImg" 
+                                [src]= "user.getImgUrl"  
+                                />
+                                <img [src]=user.img class="img-fluid avatar-md rounded-circle avatarImg" alt="Imagen usuario">
+                            </div>
+                            {{user.img}}
+                            {{user.nombre}}
+                            
+                        </div>
+                    </div> 
+                </div>
+                <div>
+                    <h3>Recetas</h3>
+                </div>
+                <div class="map">
+                    mapa to do
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <button 
+                class="btn btn-primary w-100 py-3" 
+                type="submit"
+                >
+                Actualizar evento
+            </button>
+        </div>
+    </form>    
+</div>

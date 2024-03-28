@@ -17,3 +17,9 @@
     font-size: 12px;
     line-height: 1.42857;
 }
+
+/*estilos para la imagen avatar usuario*/
+.avatarImg {
+    width: 3rem;
+    height: 3rem;
+}

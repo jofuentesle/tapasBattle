@@ -12,6 +12,15 @@ const EventsSchema = new Schema ({
     fecha: {
         type: Date
     },
+    direccion: {
+        type:String
+    },
+    cp: {
+        type:String
+    },
+    poblacion: {
+        type: String
+    },
     guests: {
         type: Array
     },

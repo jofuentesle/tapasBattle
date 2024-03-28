@@ -7,6 +7,7 @@ import { Observable, of } from  'rxjs';
 
 import { Event } from '../models/events.model';
 import { environment } from 'src/environments/environment';
+import { clippingParents } from '@popperjs/core';
 
 const base_url = environment.base_url;
 

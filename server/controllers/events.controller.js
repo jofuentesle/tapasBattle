@@ -20,6 +20,7 @@ const getEventById = async (req, res, next) => {
     try {
         
         const eventoBD = await Events.findById(uid);
+        console.log(eventoBD);
         
 
         if (!eventoBD) {
@@ -35,8 +36,8 @@ const getEventById = async (req, res, next) => {
             ok: true,
             eventsById
         });
-
-    } catch (error) {
+    }
+    catch (error) {
         console.log(error);
         return res.status(401).json({
             ok: false,
@@ -48,24 +49,16 @@ const getEventById = async (req, res, next) => {
 //crear evento
 const createEvents = async ( req, res=response ) => {
     
-    const { 
-        nombre,
-        eventPlanerId,
-        fecha,
-        guests,
-        chefs,
-        recipe,
-        img
-    } = req.body
+    const {nombre,eventPlanerId,fecha, direccion,cp,poblacion,guests,
+    chefs } = req.body;
+    console.log(req.body, nombre);
     req.body.img= 'no-image.png';
 
     try {
 
         //Creamos evento
-        const evento = new Events( req.body, req.uid );
-        evento.eventPlanerId = req.uid;
-
-        //verificamos al generar events
+        const evento = new Events( req.body);
+        
 
         //Guardamos evento
         await evento.save();

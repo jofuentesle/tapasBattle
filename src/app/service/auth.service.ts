@@ -79,7 +79,12 @@ export class AuthService {
   //Obtener todos los usuarios
   getAllUser() {
 
-    //return this.http.get(`${base_url}/usuarios`);
+    return this.http.get(`${base_url}/usuarios`, 
+      {
+          headers: {
+          'x-token': this.token
+        }
+      });
 
  }
 

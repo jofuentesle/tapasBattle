@@ -1,1 +1,38 @@
-<h1>Hola event</h1>
+<div class="container">
+  <h2 class="p-3">Nuevo evento</h2>
+  <form 
+      autocomplete="off"
+      [formGroup] = "eventForm"
+      (ngSubmit)="newEvent()"
+  > 
+    <div class="form-floating mb-3">
+      <!--<input type="hidden" value="" formControlName="guests">
+      <input type="hidden" value="" formControlName="chefs">
+      <input type="hidden" value="" formControlName="recipe">-->
+        <input  type="text" 
+                class="form-control" 
+                id="floatingInput" 
+                placeholder="Nombre evento"
+                formControlName="nombre">
+        <label for="floatingInput">Nombre del evento</label>
+      </div>
+      <div class="form-floating mb-3">
+        <div class="form-floating mb-3" mb-3>
+          <input  type="date" 
+                  class="form-control" 
+                  id="floatingPassword" 
+                  placeholder="fecha">
+          <label for="floatingPassword">Fecha del evento</label>
+        </div> 
+      </div>
+      <div class="form-floating mb-3">
+        <button 
+        class="btn btn-primary w-100 py-3" 
+        type="submit"
+        
+        >
+        Crear nuevo evento
+        </button>
+      </div>
+  </form>    
+</div>

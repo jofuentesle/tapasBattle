@@ -18,8 +18,7 @@ import { AccountSettingComponent } from './account-setting/account-setting.compo
 import { EventComponent } from './event/event.component';
 import { NewEventComponent } from './new-event/new-event.component';
 import { TapaDetailComponent } from './tapa/tapa-detail/tapa-detail.component';
-
-
+import { EventDetailsComponent } from './event-details/event-details.component';
 
 
 
@@ -31,7 +30,8 @@ import { TapaDetailComponent } from './tapa/tapa-detail/tapa-detail.component';
     AccountSettingComponent,
     EventComponent,
     NewEventComponent,
-    TapaDetailComponent
+    TapaDetailComponent,
+    EventDetailsComponent
   ],
   imports: [
     CommonModule,
