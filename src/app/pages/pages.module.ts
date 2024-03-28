@@ -9,7 +9,6 @@ import { RouterModule } from '@angular/router';
 
 import { SharedModule } from '../shared/shared.module';
 
-import {DpDatePickerModule} from 'ng2-date-picker';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TapaComponent } from './tapa/tapa.component';
@@ -40,8 +39,7 @@ import { EventDetailsComponent } from './event-details/event-details.component';
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    SharedModule,
-    DpDatePickerModule
+    SharedModule
   ],
   exports: [ 
     DashboardComponent,
