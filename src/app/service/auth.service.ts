@@ -19,6 +19,7 @@ export class AuthService {
 
   //variable para los datos
   public userData$: User;
+  public allUsers:User[]=[];
 
   constructor( private http: HttpClient, private router: Router) { }
 
@@ -47,6 +48,7 @@ export class AuthService {
         const {nombre, email, role, chefGuest,img, uid  } = res.usuarioDB;
         this.userData$ = new User(nombre, email,'', chefGuest,img, role, uid);
         localStorage.setItem('token', this.token );
+
         
       }),
       map( res => true),
@@ -77,9 +79,9 @@ export class AuthService {
  }
 
   //Obtener todos los usuarios
-  getAllUser() {
+  getAllUser(): Observable<User[]>{
 
-    return this.http.get(`${base_url}/usuarios`, 
+    return this.http.get<User[]>(`${base_url}/usuarios`, 
       {
           headers: {
           'x-token': this.token

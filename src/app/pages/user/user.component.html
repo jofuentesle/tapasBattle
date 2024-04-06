@@ -1,42 +1,89 @@
-<div class="container mt-4 mb-4 p-3 d-flex justify-content-center"> 
-    <div class="card" style="width: 100%;"> 
-        <div class="pt-2 image d-flex flex-column justify-content-center align-items-center"> 
-            <button class="btn btn-secondary"> 
-                <img
+<div class="d-flex flex-column justify-content-center" *ngIf="onLoad">
+    <mat-toolbar class="shadow">
+        <span>Mi perfil</span>
+      </mat-toolbar> 
+    <mat-card class="example-card w-100 shadow pt-3">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image">
+        <img
                     class="img-thumbnail"    
                     [src]="currentUser.getImgUrl" 
                     height="100" 
                     width="100" />
-            </button>     
-        </div>
-        <div class="d-flex flex-column bd-highlight mt-3"> 
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">
-                    <span><i class="bi bi-person mr-4"></i></span>{{ currentUser.nombre }}
-                </li>
-                <li class="list-group-item">
-                    <span><i class="bi bi-envelope"></i></span>{{ currentUser.email }}
-                </li>
-              </ul>
-        </div> 
-        <div class="mt-3">
-            
-            <a
-                routerLink="perfil" 
-                class="dropdown-item"
-                routerLinkActive="active"
-                            >test</a>
-            
-            <div class="d-grid gap-3">
-                <button     
-                        routerLink="account-settings"
-                        type="button" 
-                        class="btn btn-primary btn-block m-4">
-                        Edita tu perfil
-                </button>
+      </div>
+      <mat-card-title>{{ currentUser.nombre }}</mat-card-title>
+      <mat-card-subtitle>{{ currentUser.email }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="pt-3">
+            <mat-accordion>
+                <mat-expansion-panel hideToggle>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <mat-icon>event</mat-icon>
+                        <h3 class="p-0 m-0">Eventos</h3>
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <div 
+                    *ngFor="let event of eventsByUserId">
+                        <mat-card-content class="d-flex flex-row justify-content-between">
+                            {{event.nombre}}
+                            <button color="primary" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+                              </button> 
+                              <a routerLink="/dashboard/event-details/{{event.uid}}"><mat-icon>search</mat-icon></a>  
+                        </mat-card-content>    
+                </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+    </mat-card-content>
+    <mat-card-content class="pt-3">
+        <mat-accordion>
+            <mat-expansion-panel hideToggle>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <mat-icon>event</mat-icon>
+                    <h3 class="p-0 m-0">Recetas</h3>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <div 
+                *ngFor="let event of eventsByUserId">
+                    <mat-card-content class="d-flex flex-row justify-content-between">
+                        {{event.nombre}}
+                        <mat-icon matSuffix>ramen_dining</mat-icon>
+                    </mat-card-content>    
             </div>
-          </div>
-    </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </mat-card-content>
+    <mat-card-content class="pt-3">
+        <mat-accordion>
+            <mat-expansion-panel hideToggle>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <mat-icon>event</mat-icon>
+                    <h3 class="p-0 m-0">Premios</h3>
+                </mat-panel-title>
+            </mat-expansion-panel-header> 
+                <div *ngFor="let event of eventsByUserId">
+                    <mat-card-content class="d-flex flex-row justify-content-between">
+                        {{event.nombre}}
+                        <mat-icon matSuffix>emoji_events</mat-icon>
+                    </mat-card-content>    
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </mat-card-content>
+    <mat-card-actions>
+        <button     
+            routerLink="account-settings"
+            color="primary"
+            mat-raised-button
+            type="button" 
+            class="w-100">
+            <mat-icon matSuffix>edit</mat-icon>
+        </button>
+    </mat-card-actions>
+    </mat-card>
 </div>
 
+  
 

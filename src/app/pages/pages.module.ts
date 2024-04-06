@@ -8,7 +8,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { SharedModule } from '../shared/shared.module';
-
+import { MaterialModule } from '../material/material.module';
+import { PipesModule } from '../pipes/pipes.module';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TapaComponent } from './tapa/tapa.component';
@@ -18,15 +19,18 @@ import { EventComponent } from './event/event.component';
 import { NewEventComponent } from './new-event/new-event.component';
 import { TapaDetailComponent } from './tapa/tapa-detail/tapa-detail.component';
 import { EventDetailsComponent } from './event-details/event-details.component';
+import { UserComponent } from './user/user.component';
+
 
 
 
 @NgModule({
   declarations: [
     DashboardComponent,
+    UserComponent,
+    AccountSettingComponent,
     TapaComponent,
     VoteComponent,
-    AccountSettingComponent,
     EventComponent,
     NewEventComponent,
     TapaDetailComponent,
@@ -39,10 +43,13 @@ import { EventDetailsComponent } from './event-details/event-details.component';
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    SharedModule
+    SharedModule,
+    PipesModule,
+    MaterialModule
   ],
   exports: [ 
     DashboardComponent,
+    MaterialModule
   ]
 })
 export class PagesModule { }

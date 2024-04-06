@@ -1,74 +1,51 @@
-<div class="page-wrapper">
+<div class="page-wrapper p-3">
     <div class="container mainContainer">
     <div class="col-lg-7 text-center">
-    <h1 class="d-block p-2 bg-dark text-white">Bienvenido a tapasBattle</h1>
-    <div class="wow fadeIn" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeIn;">
-        <form
-            autocomplete="off"
-            [formGroup] = "loginForm"
-            (ngSubmit)="onLogin()"
-            >
-            <div class="row g-3">
-                <div class="col-12">
-                    <div class="form-floating">
-                        <input 
-                            type="text" 
-                            class="form-control" 
-                            id="email" 
-                            placeholder="Correo electrónico"
-                            formControlName="email"
-                            >
-                        <label for="name">
-                            <span class="m-3 iconBootsrap">
-                                <i class="bi bi-person"></i>
-                            </span>Usuario
-                        </label>
-                    </div>
-                    <div>
-                        <span class="text-danger" 
-                                *ngIf="!this.loginForm.get('email')?.valid && this.loginForm.get('email')?.touched">
-                            El correo electrónico es obigatorio y tiene que ser válido
-                        </span>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="form-floating">
-                        <input 
-                            type="password" 
-                            class="form-control" 
-                            id="subject" 
-                            placeholder="contraseña"
-                            formControlName="password"
-                            >
-                        <label for="subject">
-                            <span class="m-3 iconBootsrap">
-                                <i class="bi bi-key-fill mr-3"></i>
+        <div class="wow fadeIn formLoginBlock" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeIn;">
+            <form
+                autocomplete="off"
+                [formGroup] = "loginForm"
+                (ngSubmit)="onLogin()"
+                >
+                <mat-card>
+                    <mat-card-header class="d-flex justify-content-center">
+                    </mat-card-header>
+                    <mat-card-content>
+                        <mat-form-field appearance="outline" class="w-100">
+                        <mat-label class="">Usuario</mat-label>
+                        <mat-error>
+                            <span class="text-danger p-2" 
+                                    *ngIf="!this.loginForm.get('email')?.valid && this.loginForm.get('email')?.touched">
+                                El @ es obigatorio y válido
                             </span>
-                            Contraseña
-                        </label>
-                    </div>
-                    <div>
-                        <span class="text-danger" 
-                                *ngIf="!this.loginForm.get('password')?.valid && this.loginForm.get('password')?.touched">
-                            La contraseña es obligatoria
-                        </span>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <button 
-                        class="btn btn-primary w-100 py-3" 
-                        type="submit"
-                        [disabled]="loginForm.invalid"
-                        >
-                        Entrar
-                    </button>
-                </div>
-            </div>
-        </form>
+                        </mat-error>
+                        <input matInput formControlName="email" placeholder="Usuario">
+                        <mat-icon matSuffix>person</mat-icon>
+                        </mat-form-field>
 
-        <a routerLink="/">Restablecer contraseña</a>
-        
-    </div>
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label class="">Contraseña</mat-label>
+                            <mat-error>
+                                <span class="text-danger" 
+                                    *ngIf="!this.loginForm.get('password')?.valid && this.loginForm.get('password')?.touched">
+                                    La contraseña es obligatoria
+                                </span>
+                            </mat-error>
+                            <input matInput formControlName="password" placeholder="Contraseña">
+                            <mat-icon matSuffix>lock</mat-icon>
+                        </mat-form-field>
+                        <mat-card-actions class="w-100 p-0">
+                            <button 
+                            class="btn btn-primary w-100"
+                            mat-flat-button color="accent">
+                            <mat-icon matSuffix>login</mat-icon>
+                            </button>
+                        </mat-card-actions>
+                    </mat-card-content>
+
+                </mat-card>
+            </form>
+        </div>
     </div>
 </div>    
 

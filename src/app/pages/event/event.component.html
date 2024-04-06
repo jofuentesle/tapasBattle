@@ -1,44 +1,81 @@
 <div class="container">
     <div class="row">
-        <div class="col-12 p-3"> 
-            <div 
-            *ngIf="onLoad"
-                class="card">
-                <div class="card-header">
-                    <div 
-                    class="card-title">
-                    <p>Mi evento</p>
-                        <h2>{{ currentEvent.nombre }}</h2>
-                    </div>
-                </div>
-                <div class="card-body">
+        <mat-card class="example-card" *ngIf="onLoad">
+            <form action="">
+                <mat-card-header class="d-flex">
+                    <div mat-card-avatar class="example-header-image"></div>
+                    <mat-card-title>{{currentUser.nombre}}</mat-card-title>
+                    <mat-card-subtitle>{{currentUser.email}}</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <mat-card-title class="d-flex justify-content-center">
+                        <h1>{{ currentEvent.nombre }}</h1>
+                    </mat-card-title>
+                </mat-card-content>
+                <mat-card-content>
                     <div>
-                        <button (click)="confirmarAsistencia()">Confirmar asistencia</button>
+                        <img class="img img-fluid imgEvent" mat-card-image [src]="currentEvent.img | imagen:'eventos'">
+                    </div>
+                    <div class="mt-3">
+                        <mat-form-field style="width:100%">
+                            <mat-label>Selecciona foto</mat-label>
+                            <button mat-icon-button matPrefix (click)="f_input.click()">
+                        <mat-icon>attach_file</mat-icon>
+                      </button>
+                            <input type="text" readonly matInput [formControl]="" />
+                            <input
+                        type="file"
+                        multiple
+                        hidden
+                        #f_input
+                        (change)="cambiarImagen(f_input.files)"
+                      />
+                            <mat-error>Falta el archivo</mat-error>
+                        </mat-form-field>
                     </div>
                     <div>
-                        <div>
-                            <h4>Organizador</h4>
-                            <img [src]="" alt="organizador"/>
-                        </div>
-                        
-                        <h3>Ubicación</h3>
-                        
-                        <h4>
-                            <span class="m-2">
-                                <i class="bi bi-calendar3"></i>
-                            </span>
-                            {{currentEvent.Date| date: 'dd/MM/yyyy'}}
-                        </h4>
-                    </div>
-                    <app-tapa
-                        idEvent={{currentEvent.uid}}
-                    ></app-tapa>
+                        <mat-card-title class="mt-3">Envia invitaciones</mat-card-title>
+                        <mat-accordion class="example-headers-align" multi>
+                        <mat-expansion-panel>
+                          <mat-expansion-panel-header>
+                            <mat-panel-description>
+                              Selecciona invitados
+                              <mat-icon>account_circle</mat-icon>
+                            </mat-panel-description>
+                          </mat-expansion-panel-header>
+                            <div  *ngFor="let user of allUsers.usuarios">
+                                <mat-card *ngIf="userLoad">
+                                    <mat-card-header class="d-flex justify-content-between align-items-center">
+                                        <div class="d-flex">
+                                            <div class="me-2">
+                                                <img mat-card-avatar [src]="user.img | imagen:'usuarios'"/>
+                                            </div>
+                                            <div class="">
+                                                <mat-card-title>{{user.nombre}}</mat-card-title>
+                                                <mat-card-subtitle>{{user.email}}</mat-card-subtitle>
+                                            </div>
+                                        </div>
+                                        <mat-slide-toggle></mat-slide-toggle>
+                                    </mat-card-header>
+                                </mat-card>
+                            </div>
+                        </mat-expansion-panel>
+                        </mat-accordion>
+                    </div>  
+                    <div>
+                        <mat-card-title class="mt-3">Dirección</mat-card-title>
 
-                    <div>
-                        <img src={{currentEvent.img}} alt=""/>
                     </div>
-                <div>
-            </div>
-        </div>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button 
+                        class="btn btn-primary w-100 p-3"
+                        mat-flat-button
+                        color="accent">
+                            Actualizar evento
+                    </button>
+                </mat-card-actions>
+            </form>
+        </mat-card>
     </div>
 </div>

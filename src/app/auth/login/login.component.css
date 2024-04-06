@@ -1,3 +1,14 @@
-.iconBootsrap {
-    font-size: 1.5rem;
+.backImg {
+    height: 75%!important;
+    background-image: url('../../../assets/img/portada.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: relative;
+    display:flex!important;
+    background-color: red!important;
+
+}
+.formLoginBlock {
+    padding-top:50% ;
 }

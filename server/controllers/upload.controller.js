@@ -84,15 +84,14 @@ const { actualiarImg } = require('../helpers/actualiarImg');
             res.sendFile( pathImg );
 
         } else {
-
-            const pathImg = path.join(__dirname, `../upload/no-image.png` );
+           
+            const pathImg = path.join(__dirname, `../upload/no-file.png` );
             res.sendFile( pathImg );
+            
         }
-         
-        
-    
+            
     }
-
+        
 module.exports = {
 
     fileUpload,

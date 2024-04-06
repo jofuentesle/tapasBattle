@@ -1,3 +1,7 @@
+import { environment } from '../../environments/environment';
+
+const base_url = environment.base_url; 
+
 interface _EventUser {
   _id: string,
   nombre: string,
@@ -17,7 +21,7 @@ export class Event {
 
     constructor(
         public nombre:string,
-        public Date,
+        public fecha:Date,
         public eventPlanerId?:_EventUser,
         public uid?:string,
         public img?:string,
@@ -25,4 +29,5 @@ export class Event {
         public guests?:_EventUser[],
         public recipe?:_EventRecipe[],
       ) {}
+
     }

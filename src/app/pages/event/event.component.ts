@@ -9,6 +9,9 @@ import { Event } from '../../models/events.model';
 import { AuthService } from 'src/app/service/auth.service';
 import { User } from 'src/app/models/user.model';
 
+
+import { FileUploadService } from 'src/app/service/file-upload.service';
+
 @Component({
   selector: 'app-event',
   templateUrl: './event.component.html',
@@ -20,7 +23,12 @@ export class EventComponent implements OnInit {
   public currentEvent:Event;
   public onLoad:Boolean = false;
   public currentUser:User;
-  public guests:User[];
+  public allUsers:any;
+  public userLoad:Boolean = false;
+  public imgUpload:File;
+  public imgTemp: any = null;
+  public viewImg: Boolean = false;
+  isChecked = true;
    
   eventsForm: FormGroup;
 
@@ -34,6 +42,7 @@ export class EventComponent implements OnInit {
     this.currentUser = this.authSrv.userData$;
    
     this.getId();
+    this.getAllUser();
 
   }
 
@@ -48,9 +57,12 @@ export class EventComponent implements OnInit {
   
   //Obtenemos evento por id
   async getEventId ( idEvent ) {
-    
+  
+
     await this.eventSrv.getEventById(idEvent).subscribe({
       next: event => {
+
+        //recuperamos datos usuario logeado
         this.currentEvent = event.eventsById;
         this.onLoad=true;
       },
@@ -58,26 +70,34 @@ export class EventComponent implements OnInit {
     )}
 
  
-  confirmarAsistencia() {
-    console.log(this.currentEvent);
+
+  //obtener todos los usuarios
+  getAllUser() {
     
-    this.currentEvent = {
-    chefs: [],
-    eventPlanerId: null,
-    Date: toString,
-    guests: [],
-    img: null,
-    nombre: "Mi evento con invitados y cocineos y recetas",
-    recipe: [],
-    uid: "65e484acaca6be4cf396b2ef"
-  }
-    this.eventSrv.updateEvent(this.currentEvent).subscribe(resp => {
-      console.log(resp)
-    
+    this.allUsers = this.authSrv.getAllUser().subscribe({
+      next: users => {
+        this.userLoad = true;
+        this.allUsers = users;
+      },
+      error: err=>console.log(err)
     })
   }
 
-  //obtener todos los usuarios
-  getAllUser() {}
+  cambiarImagen(e) {
+    this.imgUpload = e.target.files[0];
+    if( !this.imgUpload ) {
+      this.viewImg = true;
+      return;
+    }
+
+    const reader = new FileReader();
+    const url64 = reader.readAsDataURL( this.imgUpload );
+
+    reader.onloadend = () => {
+      this.imgTemp = reader.result;
+      this.viewImg = false;
+    }
+    console.log(e)
+  }
 
 }

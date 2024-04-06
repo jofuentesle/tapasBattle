@@ -11,9 +11,7 @@ const getUsuarios = async (req, res) => {
     const usuarios = await Usuario.find();
 
     res.status(200).json({
-        ok:true,
-        usuarios,
-        uid: req.uid
+        usuarios
     })
 }
 

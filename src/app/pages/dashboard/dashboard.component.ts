@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, VERSION } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { EventsService } from 'src/app/service/events.service';
@@ -24,8 +24,10 @@ export class DashboardComponent implements OnInit {
 
   constructor(  private eventsSrv:EventsService,
                 private authSrv:AuthService,
-                private router:Router ) { 
+                private router:Router) { 
+                  
                   this.currentUser = authSrv.userData$;
+                
                 }
 
   ngOnInit(): void {
@@ -48,5 +50,10 @@ export class DashboardComponent implements OnInit {
     this.router.navigateByUrl('dashboard/new-event');
 
     //Swal.fire('Error', 'No se pueden crear eventos', 'error');
+  }
+
+  //detalles evento ruta
+  onrouter( uid:string) {
+    this.router.navigateByUrl(`/dashboard/event/${uid}`);
   }
 }

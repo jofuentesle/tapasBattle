@@ -1,15 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/service/auth.service';
-import { environment } from 'src/environments/environment';
+
+import { MatAccordion } from '@angular/material/expansion';
+
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
+
+
+  @ViewChild(MatAccordion) accordion: MatAccordion;
 
   public imgUrl = '';
   public user: User;
@@ -28,6 +33,13 @@ export class HeaderComponent implements OnInit {
   
   ngOnInit(): void {
    
+  }
+
+  onUser() {
+    this.router.navigateByUrl('dashboard/user');
+  }
+  onHome() {
+    this.router.navigateByUrl('/');
   }
 
   onLogOut() {

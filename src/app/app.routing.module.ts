@@ -6,6 +6,7 @@ import { AuthRoutingModule} from './auth/auth-routing.module';
 
 import { NofoundComponent } from './pages/nofound/nofound.component';
 
+
 const routes: Routes = [
   
     { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -19,6 +20,7 @@ const routes: Routes = [
       RouterModule.forRoot( routes ),
       AuthRoutingModule,
       PagesRoutingModule,
+      
     ],
     exports: [ RouterModule ]
   })

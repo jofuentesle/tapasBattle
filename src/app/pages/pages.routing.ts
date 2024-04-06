@@ -60,7 +60,7 @@ export const routes: Routes = [
             component: NewEventComponent
           },
           {
-            path: 'event-details/:uid',
+            path: 'event-details/:id',
             component: EventDetailsComponent
           },
           { path: '**', component:NofoundComponent },

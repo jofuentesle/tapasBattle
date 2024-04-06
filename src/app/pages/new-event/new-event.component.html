@@ -1,14 +1,50 @@
 <div class="container">
-  <h2 class="p-3">Nuevo evento</h2>
   <form 
+    autocomplete="off"
+    [formGroup] = "eventForm"
+    (ngSubmit)="newEvent()"
+    >
+    <mat-card>
+      <mat-card-header class="d-flex justify-content-center">
+        <mat-card-title class="mat-headline-5">Nuevo evento</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label class="">Nombre envento</mat-label>
+              <input matInput formControlName="nombre" placeholder="Nombre evento">
+            <mat-icon matSuffix>table_restaurant</mat-icon>
+            <mat-error>El nombre es obligatorio</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Reserva fecha</mat-label>
+            <input  matInput 
+                    type="date"
+                    formControlName="fecha" 
+                    [matDatepicker]="picker">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+              <mat-error>La fecha es obligatori</mat-error>
+          </mat-form-field>   
+      </mat-card-content>
+      <mat-card-actions class="pb-3">
+        <button
+            color="primary" 
+            class="w-100 p-3"
+            mat-flat-button>
+            <mat-icon>add_circle</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+  <!--<form 
       autocomplete="off"
       [formGroup] = "eventForm"
       (ngSubmit)="newEvent()"
   > 
     <div class="form-floating mb-3">
-      <!--<input type="hidden" value="" formControlName="guests">
+      <input type="hidden" value="" formControlName="guests">
       <input type="hidden" value="" formControlName="chefs">
-      <input type="hidden" value="" formControlName="recipe">-->
+      <input type="hidden" value="" formControlName="recipe">
         <input  type="text" 
                 class="form-control" 
                 id="floatingInput" 
@@ -17,23 +53,21 @@
         <label for="floatingInput">Nombre del evento</label>
       </div>
       <div class="form-floating mb-3">
-        <div class="form-floating mb-3" mb-3>
           <input  type="date"
                   value 
                   class="form-control" 
                   id="floatingPassword" 
                   placeholder="fecha">
           <label for="floatingPassword">Fecha del evento</label>
-        </div> 
-      </div>
+        </div>
       <div class="form-floating mb-3">
         <button 
         class="btn btn-primary w-100 py-3" 
         type="submit"
-        
+
         >
         Crear nuevo evento
         </button>
       </div>
-  </form>    
+  </form>-->    
 </div>

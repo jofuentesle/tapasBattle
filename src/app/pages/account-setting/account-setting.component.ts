@@ -1,9 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, Validators, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-
-
+import { MatFormFieldControl } from '@angular/material/form-field';
 import Swal from 'sweetalert2';
 
 import { User } from '../../models/user.model';
@@ -13,25 +11,29 @@ import { FileUploadService } from 'src/app/service/file-upload.service';
 @Component({
   selector: 'app-account-setting',
   templateUrl: './account-setting.component.html',
-  styleUrls: ['./account-setting.component.css']
+  styleUrls: ['./account-setting.component.css'],
 })
 export class AccountSettingComponent implements OnInit {
+
 
    /*declaramos variables*/
    currentUser:User;
    imgUrl = '';
    accountForm: FormGroup;
    public formSubmitted = true;
+   public onLoad: Boolean = false;
    public imgUpload: File;
    public imgTemp: any = null;
    public viewImg: Boolean = false;
+   value = 'Subir imagen';
 
   constructor(  private fb:FormBuilder,
                 private router: Router,
                 private authSrv: AuthService,
                 private upSrv: FileUploadService) { 
-                  //Variable para cambiarvista imagen
+                  //Variable para cambiar vista de imagen
                   this.viewImg = true;
+                  this.onLoad = true;
                 }
 
     //Obtenemos path img
@@ -46,12 +48,14 @@ export class AccountSettingComponent implements OnInit {
     this.currentUser = this.authSrv.userData$;
     //Obtenemos img path
     this.getUrl();
-    //Inicializamos formulario
-    this.accountForm = this.fb.group({
-      nombre: [this.currentUser.nombre, Validators.required],
+     //Inicializamos formulario
+     this.accountForm = this.fb.group({
+      nombre: [ this.currentUser.nombre, Validators.required],
       email: [this.currentUser.email, [ Validators.required, Validators.email] ],
+      archivo:[],
     })
     this.imgTemp = '';
+    console.log(this.accountForm.get('archivo')?.touched);
   }
 
   //Atualizamos perfil
@@ -67,17 +71,15 @@ export class AccountSettingComponent implements OnInit {
 
   }
 
-      //Actualizamos img
-    async refreshImg() {  
-      this.upSrv.updateFile(this.imgUpload, 'usuarios', this.currentUser.uid )
-      .then( img => this.authSrv.userData$.img = img)
-    }
+  //Actualizamos img
+  async refreshImg() {  
+    this.upSrv.updateFile(this.imgUpload, 'usuarios', this.currentUser.uid )
+    .then( img => this.authSrv.userData$.img = img)
+}
 
   //Subimos foto
   cambiarImagen( e ) {
-
       this.imgUpload = e.target.files[0];
-  
       if( !this.imgUpload ) {
         this.viewImg = true;
         return;

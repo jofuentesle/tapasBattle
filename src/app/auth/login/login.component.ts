@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+
+import { MatAccordion } from '@angular/material/expansion';
 
 import { Router } from '@angular/router';
 
@@ -15,6 +17,8 @@ import { AuthService } from '../../service/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+
+  @ViewChild(MatAccordion) accordion: MatAccordion;
 
   /*declaramos variables*/
   loginForm: FormGroup;
