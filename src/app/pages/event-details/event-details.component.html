@@ -1,157 +1,93 @@
-  
-  <form 
-  autocomplete="off"
-  [formGroup] = "eventForm"
-  (ngSubmit)="updateEvent()"
-  class="" 
-  > 
-
-  <div class="container">
+<div class="container">
     <div class="row">
-        <mat-card class="example-card" *ngIf="onLoad">
+        <form 
+            autocomplete="off"
+            [formGroup] = "eventForm"
+            (ngSubmit)="updateEvent()"
+            class="" 
+        > 
+        <mat-card class="max-carWidth" *ngIf="onLoad">
             <form action="">
-                <mat-card-header class="d-flex">
+                <mat-card-header class="d-flex flex-row-reverse">
                         <img   
                             [src]="currentUser.getImgUrl" 
                             height="100" 
-                            width="100" />
+                            width="100"
+                            class="avatar" />
                     <mat-card-title>{{currentUser.nombre}}</mat-card-title>
                     <mat-card-subtitle>{{currentUser.email}}</mat-card-subtitle>
                 </mat-card-header>
-                <mat-card-content>
-                    <mat-card-title class="d-flex justify-content-center">
-                        <h1>{{ currentEvent.nombre }}</h1>
-                    </mat-card-title>
-                </mat-card-content>
-                <mat-card-content>
-                    <div>
-                        <img class="img img-fluid imgEvent" mat-card-image [src]="currentEvent.img | imagen:'eventos'">
-                    </div>
-                    <div class="mt-3">
-                        <mat-form-field style="width:100%">
-                            <mat-label>Selecciona foto</mat-label>
-                            <button mat-icon-button matPrefix (click)="f_input.click()">
-                        <mat-icon>attach_file</mat-icon>
-                      </button>
-                            <input type="text" readonly matInput [formControl]="" />
-                            <input
-                        type="file"
-                        multiple
-                        hidden
-                        #f_input
-                        (change)="cambiarImagen(f_input.files)"
-                      />
-                            <mat-error>Falta el archivo</mat-error>
-                        </mat-form-field>
-                    </div>
-                    <div>
-                        <mat-card-title class="mt-3">Envia invitaciones</mat-card-title>
-                        <mat-accordion class="example-headers-align" multi>
-                        <mat-expansion-panel>
-                          <mat-expansion-panel-header>
-                            <mat-panel-description>
-                              Selecciona invitados
-                              <mat-icon>account_circle</mat-icon>
-                            </mat-panel-description>
-                          </mat-expansion-panel-header>
-                            <div  *ngFor="let user of allUsers.usuarios">
-                                <mat-card *ngIf="userLoad">
-                                    <mat-card-header class="d-flex justify-content-between align-items-center">
-                                        <div class="d-flex">
-                                            <div class="me-2">
-                                                <img mat-card-avatar [src]="user.img | imagen:'usuarios'"/>
-                                            </div>
-                                            <div class="">
-                                                <mat-card-title>{{user.nombre}}</mat-card-title>
-                                                <mat-card-subtitle>{{user.email}}</mat-card-subtitle>
-                                            </div>
-                                        </div>
-                                        <mat-slide-toggle></mat-slide-toggle>
-                                    </mat-card-header>
-                                </mat-card>
-                            </div>
-                        </mat-expansion-panel>
-                        </mat-accordion>
-                    </div>  
-                    <div>
-                        <mat-card-title class="mt-3">Dirección</mat-card-title>
-                    </div>
-                </mat-card-content>
-                <mat-card-actions>
-                    <button 
-                        class="btn btn-primary w-100 p-3"
-                        mat-flat-button
-                        color="accent">
-                            Actualizar evento
-                    </button>
-                </mat-card-actions>
             </form>
         </mat-card>
-    </div>
-</div>
 
-    <mat-card *ngIf="onLoad">
-        <mat-card-header class="d-flex justify-content-center">
-        <mat-card-title class="mat-headline-5">
-            Personaliza tu evento
-        </mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <mat-form-field appearance="outline" class="w-100">
-                <mat-label class="">{{currentEvent.nombre}}</mat-label>
-                <mat-error>
-                    <span class="text-danger p-2">
-                        El nombre es obigatorio y válido
-                    </span>
-                </mat-error>
-                <input matInput formControlName="nombre" placeholder="Nombre evento">
-                <mat-icon matSuffix>restaurant</mat-icon>
-            </mat-form-field>
-            <mat-form-field appearance="outline" class="w-100">
-                <mat-label 
-                    class="">{{currentEvent.fecha}}</mat-label>
-                <mat-error>
-                    <span class="text-danger p-2">
-                        El nombre es obigatorio y válido
-                    </span>
-                </mat-error>
-                <input matInput  formControlName="fecha" placeholder="{{currentEvent.fecha}}">
-                <mat-hint>MM/DD/YYYY</mat-hint>
-                <mat-icon matSuffix>
+        <mat-card *ngIf="onLoad">
+            <mat-card-header class="d-flex justify-content-center">
+            <mat-card-title class="mat-headline-5">
+                Personaliza tu evento
+            </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <mat-card-title class="d-flex justify-content-start">
+                    <h1 >{{ currentEvent.nombre }}</h1>
+                </mat-card-title>
+                <mat-card-subtitle class="pb-3">
+                    <mat-icon class="material-symbols-outlined">
                     calendar_month
-                </mat-icon>
-            </mat-form-field>
-
-            <div>
-                <img class="img img-fluid imgEvent" mat-card-image [src]="currentEvent.img | imagen:'eventos'">
-            </div>
-            <mat-card-content class="pt-3">
-                <mat-form-field class="w-100">
-                    <ngx-mat-file-input
-                        (change)="cambiarImagen($event)" 
-                        formControlName="archivo">
-                    </ngx-mat-file-input>
-                    <mat-icon matSuffix>folder</mat-icon>
-                  </mat-form-field>
+                    </mat-icon>
+                    <span class="mr-3">{{currentEvent.fecha | date }}</span>
+                </mat-card-subtitle>
             </mat-card-content>
-            <!--<div class="mt-3">
-                <mat-form-field style="width:100%">
-                    <mat-label>Selecciona foto</mat-label>
-                    <button mat-icon-button matPrefix>
-                        <mat-icon>attach_file</mat-icon>
+            <mat-card-content>
+                <mat-card-content>
+                    <img mat-card-image class="img img-fluid imgEvent" mat-card-image [src]="currentEvent.img | imagen:'eventos'">
+                </mat-card-content>
+                <mat-card-content class="pt-3">
+                    <mat-form-field style="width:100%">
+                        <mat-label>Selecciona foto</mat-label>
+                        <ngx-mat-file-input
+                            (change)="cambiarImagen($event)" 
+                            formControlName="archivo">
+                        </ngx-mat-file-input>
+                        <mat-error>Falta el archivo</mat-error>
+                        <mat-icon matSuffix>attach_file</mat-icon>
+                    </mat-form-field>
+                </mat-card-content>
+                <mat-card-content>
+                    <mat-accordion class="example-headers-align" multi>
+                    <mat-expansion-panel class="mat-expansion-panel-bodyCustom">
+                        <mat-expansion-panel-header>
+                        <mat-panel-description>
+                            Selecciona invitados
+                        </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <mat-list *ngFor="let user of allUsers">
+                                    <div matListItemTitle>{{user.nombre}}</div>
+                                    <div matListItemLine>{{user.email}}</div>
+                                   
+                                <mat-slide-toggle
+                                    formControlName="invitados" 
+                                    [(ngModel)]="user.uid" 
+                                    (change)="toggleChange(user.uid)">
+                                </mat-slide-toggle>
+                              </mat-list-item>
+                            <mat-divider></mat-divider>
+                            <mat-list-item>
+                            </mat-list-item>
+                          </mat-list>
+                    </mat-expansion-panel>
+                    </mat-accordion>
+                </mat-card-content>
+                <mat-card-actions class="pt-3">
+                    <button 
+                        class="w-100"
+                        color="primary"
+                        mat-raised-button
+                        type="submit">
+                        <mat-icon matSuffix>table_restaurant</mat-icon>Guardar cambios
                     </button>
-                    <input
-                        type="file"
-                        (change)="cambiarImagen($event)"
-                    />
-                    
-                </mat-form-field>
-            </div>-->
-            <mat-card-actions class="pb-3">
-                <button 
-                class="btn btn-primary w-100 p-3"
-                mat-flat-button color="accent">Crear evento</button>
-            </mat-card-actions>
-        </mat-card-content>
-    </mat-card>
-  </form>
+                </mat-card-actions>
+            </mat-card-content>
+        </mat-card>
+        </form>
+    </div>
+</div>    

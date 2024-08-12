@@ -76,7 +76,6 @@ const updateUsuarios = async (req, res) => {
         
         //Actualizamos usuario
         const campos = req.body;
-        console.log(campos);
 
         if ( usuarioDB.email === req.body.email) {
             delete campos.email;

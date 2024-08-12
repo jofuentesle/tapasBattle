@@ -1,8 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, Validators, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { MatFormFieldControl } from '@angular/material/form-field';
-import Swal from 'sweetalert2';
+
 
 import { User } from '../../models/user.model';
 import { AuthService } from 'src/app/service/auth.service';
@@ -84,7 +83,7 @@ export class AccountSettingComponent implements OnInit {
         this.viewImg = true;
         return;
       }
-
+      console.log("account", this.imgUpload);
       const reader = new FileReader();
       const url64 = reader.readAsDataURL( this.imgUpload );
 

@@ -78,8 +78,8 @@ const createEvents = async ( req, res=response ) => {
 
 //Actualizamos evento
 const updateEvent = async (req, res, next) => {
-
-    const uid = req.params.id
+    
+    const uid = req.params
 
     try {
         
@@ -101,9 +101,10 @@ const updateEvent = async (req, res, next) => {
         */
         //Actualizamos evento
         const campos = req.body;
+        console.log("asdsafasfasfasfasfasfasfsa",campos);
 
         const eventsUpdate = await Events.findByIdAndUpdate( uid, campos, { new: true});
-        
+        console.log('event', eventsUpdate);
         console.log("eventes" );
         res.status(200).json({
             ok: true,

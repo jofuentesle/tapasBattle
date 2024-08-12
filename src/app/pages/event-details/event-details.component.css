@@ -1,0 +1,21 @@
+.imgEvent {
+    height: auto;
+    width: 100%;
+  }
+  
+  .max-carWidth {
+    max-width: 400px;
+  }
+  
+  .example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+  }
+  
+  .mat-mdc-card-header { 
+    padding: 5px!important;
+  }
+
+  .mat-mdc-list-item-icon {
+    color: rgba(0, 0, 0, 0.54);
+  }

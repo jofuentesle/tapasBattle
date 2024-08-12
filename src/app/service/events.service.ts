@@ -87,12 +87,17 @@ export class EventsService {
     );
   }
 
-updateEvent( event:any ): Observable<any> {
+updateEvent( { ...eventForm }, id ): Observable<Event> {
+
+  console.log("service",id);
+  console.log("service2",{ ...eventForm });
+
   
-  const url = `${ base_url }/events/${ event.uid}`;
+  const url = `${ base_url }/events/${id}`;
+  console.log('url', url);
   const token = localStorage.getItem('token') || '';
 
-  return this.http.put<Event>(url, { event },
+  return this.http.put<Event>(url , eventForm,
     {
     headers: {
       'x-token': token
